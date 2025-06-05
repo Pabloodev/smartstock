@@ -1,13 +1,7 @@
 "use client"
 
 import { TrendingUp } from "lucide-react"
-import {
-  Label,
-  PolarGrid,
-  PolarRadiusAxis,
-  RadialBar,
-  RadialBarChart,
-} from "recharts"
+import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
 
 import {
   Card,
@@ -16,74 +10,74 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/app/ui/components/card'
+} from "@/app/ui/components/card"
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/app/ui/components/chart"
 
-import { ChartConfig, ChartContainer } from '@/app/ui/components/chart'
+export const description = "A radial chart with stacked sections"
 
-const chartData = [
-  { browser: "safari", visitors: 200, fill: "#0257bf" }, // azul piscina
-]
+const chartData = [{ month: "january", zte: 1260, intelbras: 570, cianet: 170 }]
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  zte: {
+    label: "zte",
+    color: "var(--chart-1)",
   },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
+  intelbras: {
+    label: "intelbras",
+    color: "var(--chart-2)",
+  },
+  cianet: {
+    label: "cianet",
+    color: "var(--chart-3)",
   },
 }
 
 export default function ChartRadial() {
+  const totalVisitors = chartData[0].zte + chartData[0].intelbras
+
   return (
-    <Card className="flex flex-col w-[400px] h-[400px] bg-white text-white bg-black">
+    <Card className="flex flex-col w-[400px] h-[400px] text-white bg-black">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Aparelhos Retirados</CardTitle>
-        <CardDescription>Janeiro - Março 2025</CardDescription>
+        <CardTitle>Aparelhos retirados em 6 meses</CardTitle>
+        <CardDescription>Janeiro - Junho 2026</CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
+      <CardContent className="flex flex-1 items-center pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
+          className="mx-auto aspect-square w-full max-w-[250px]"
         >
           <RadialBarChart
             data={chartData}
-            startAngle={0}
-            endAngle={250}
+            endAngle={180}
             innerRadius={80}
-            outerRadius={110}
+            outerRadius={130}
           >
-            <PolarGrid
-              gridType="circle"
-              radialLines={false}
-              stroke="none"
-              className="first:fill-muted last:fill-background"
-              polarRadius={[86, 74]}
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
             />
-
-            <RadialBar dataKey="visitors" background cornerRadius={10} />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {
                   if (viewBox && "cx" in viewBox && "cy" in viewBox) {
                     return (
-                      <text
-                        x={viewBox.cx}
-                        y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                      >
+                      <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle">
                         <tspan
                           x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="fill-foreground text-4xl font-bold"
+                          y={(viewBox.cy || 0) - 16}
+                          className="fill-blue-500 text-2xl font-bold"
                         >
-                          {chartData[0].visitors.toLocaleString()}
+                          {totalVisitors.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
+                          y={(viewBox.cy || 0) + 4}
+                          className="fill-white"
                         >
                           Aparelhos
                         </tspan>
@@ -93,12 +87,34 @@ export default function ChartRadial() {
                 }}
               />
             </PolarRadiusAxis>
+            <RadialBar
+              dataKey="zte"
+              stackId="a"
+              cornerRadius={5}
+              fill="var(--color-zte)"
+              className="stroke-transparent stroke-2"
+            />
+            <RadialBar
+              dataKey="intelbras"
+              fill="var(--color-intelbras)"
+              stackId="a"
+              cornerRadius={5}
+              className="stroke-transparent stroke-2"
+            />
+            <RadialBar
+              dataKey="cianet"
+              fill="var(--color-cianet)"
+              stackId="a"
+              cornerRadius={5}
+              className="stroke-transparent stroke-2"
+            />
+            
           </RadialBarChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Aparelhos retirados <TrendingUp className="h-4 w-4" />
+        <div className="flex items-center gap-2 leading-none font-medium">
+          Aparelhos com baixa de estoque <TrendingUp className="h-4 w-4" />
         </div>
       </CardFooter>
     </Card>

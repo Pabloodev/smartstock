@@ -9,7 +9,7 @@ export default function Page() {
       <h1 className="mb-10 text-3xl">Dashboards Gerais</h1>
 
       <div className="flex items-center gap-10 flex-wrap">
-        <ChartRadial />
+      <ChartRadial />
         <ChartBarHorizontal />
         <ChartAreaInteractive />
       </div>
