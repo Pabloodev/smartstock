@@ -28,7 +28,7 @@ export default function Chart() {
   }, []);
 
   return (
-    <div className="bg-zinc-800 text-white p-5 rounded-xl w-[400px] flex flex-col gap-10 items-center">
+    <div className="bg-black text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center">
       <div>
         <h1 className="text-lg font-medium">Total de equipamentos retirados</h1>
         <p className="text-gray-300">Contagem total a partir de junho de 2025.</p>
