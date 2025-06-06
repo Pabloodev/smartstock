@@ -2,7 +2,7 @@ import Sidenav from "../ui/components/sidenav"
 
 export default function homeLayout({ children }) {
   return (
-    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-zinc-950">
+    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-zinc-900">
       <div className="w-full flex-none md:w-64">
         <Sidenav />
       </div>
