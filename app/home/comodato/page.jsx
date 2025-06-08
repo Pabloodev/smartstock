@@ -49,7 +49,7 @@ export default function Page() {
   }
 
   return (
-    <div className="p-3">
+    <div className="p-10">
       <h2 className="text-xl font-bold mb-4">Escaneie o QR Code do MAC:</h2>
       <input
         type="text"
@@ -84,7 +84,7 @@ export default function Page() {
             <p><span className="text-gray-300">Status comodato:</span> {resultado.status_comodato}</p>
           </div>
         ) : (
-          <div className="p-10">
+          <div className="pt-10">
             <span>Passe o leitor bip no código de barras do MAC do aparelho</span>
           </div>
         )}
