@@ -55,7 +55,7 @@ export default function Page() {
         type="text"
         ref={inputRef}
         placeholder="Escaneie com o maquina ou digite o mac manualmente..."
-        className="border p-2 w-full max-w-md rounded-sm"
+        className="border border-blue-500 p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 max-w-md rounded-sm"
       />
       <div>
         {resultado && !resultado.erro ? (
