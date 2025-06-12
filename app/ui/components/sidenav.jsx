@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { House, Router, Settings, LibraryBig } from 'lucide-react';
 
+import Logout from "./Logout";
 
 export default function Sidenav() {
   return (
-    <div className="bg-zinc-950bg-zinc-900 h-screen w-[120px] border-r-1 border-white text-white p-10 flex flex-col items-center gap-10">
+    <div className="bg-zinc-950bg-zinc-900 h-screen w-[120px] border-r-1 border-white text-white p-10 flex flex-col justif items-center gap-10">
 
       <div className="flex items-center">
         <Link href={"/"}>
@@ -36,7 +37,10 @@ export default function Sidenav() {
           </li>
 
         </ul>
+
       </div>
+
+      <Logout />
 
     </div>
   )
