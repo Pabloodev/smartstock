@@ -10,22 +10,22 @@ import { EyeClosed, Eye } from "lucide-react";
 import Loading from "./Loading";
 import Link from "next/link";
 
-import { sign } from "./../../actions/auth";
+import { register } from "@/app/actions/register";
 
 const initialState = {
   message: "",
   error: false,
 };
 
-export function LoginForm({ className, ...props }) {
+export function RegisterForm({ className, ...props }) {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [state, formAction] = useActionState(
     async (prevState, formData) => {
       setIsSubmitting(true);
-      const result = await sign(formData);
-      setIsSubmitting(false);
+      const result = await register(formData);
+      setIsSubmitting(false); 
       return result;
     },
     initialState
@@ -39,19 +39,35 @@ export function LoginForm({ className, ...props }) {
       {...props}
     >
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold text-white">Login</h1>
+        <h1 className="text-2xl font-bold text-white">Registro</h1>
         <p className="text-muted-foreground text-sm text-balance text-white">
-          Faça o login para acessar o painel do cliente.
+          Faça o registro para acessar o painel do cliente.
         </p>
       </div>
 
+      
+
       <div className="grid gap-2">
+
+        <div className="grid gap-3">
+          <Label htmlFor="email">Nome</Label>
+          <Input
+            id="nome"
+            type="text"
+            placeholder="joao"
+            required
+            name="nome"
+            className="invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-pink-500 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
+          disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
+          />
+        </div>
+
         <div className="grid gap-3">
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="text"
-            placeholder="joao.colaborator"
+            placeholder="joao.colaborador@gmail.com"
             required
             name="email"
             className="invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-pink-500 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
@@ -90,9 +106,9 @@ export function LoginForm({ className, ...props }) {
           <p className="text-pink-600 text-sm">{state.message}</p>
         )}
 
-        <Link href="/register"> 
+        <Link href="/"> 
           <button className="underline underline-offset-1 text-gray-300 hover:text-white cursor-pointer">
-            <p>Ainda não tem uma conta? faça o cadastro.</p>
+            <p>Já tem uma conta, faça login.</p>
           </button>
         </Link>
 
@@ -101,7 +117,7 @@ export function LoginForm({ className, ...props }) {
             <Loading />
           ) : (
             <Button type="submit" className="w-full cursor-pointer">
-              Login
+              Registrar
             </Button>
           )}
         </div>
