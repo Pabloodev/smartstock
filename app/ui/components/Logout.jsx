@@ -19,8 +19,9 @@ export default function Logout() {
 
   return (
     <div>
-      <button className='text-red-400 cursor-pointer' title='Deslogar' onClick={handleLogout}>
+      <button className='flex items-center gap-3 text-red-400 cursor-pointer' title='Deslogar' onClick={handleLogout}>
       <DoorOpen />
+      <p className='text-white hover:text-red-400'>Deslogar</p>
       </button>
     </div>
   )

@@ -39,10 +39,10 @@ export default function Chartbar() {
   };
 
   return (
-    <div className="bg-zinc-950 text-white p-6 rounded-xl w-[500px] h-[700px] flex flex-col gap-6">
+    <div className="bg-white text-black p-6 rounded-xl w-[500px] h-[700px] flex flex-col gap-6 border-2 border-blue-500">
       <div>
         <h1 className="text-lg font-medium">Total de equipamentos retirados por OS</h1>
-        <p className="text-gray-400 text-sm">Contagem total a partir de junho de 2025.</p>
+        <p className="text-gray-500 text-sm">Contagem total a partir de junho de 2025.</p>
       </div>
 
       <div className="w-full flex flex-col gap-4">
@@ -60,7 +60,7 @@ export default function Chartbar() {
               
               {/* Container da Barra + Valor */}
               <div className="flex-1 flex items-center gap-2">
-                <div className="w-full bg-zinc-800 rounded-full h-5">
+                <div className="w-full bg-gray-900 rounded-full h-5">
                   <div
                     className="bg-blue-500 h-5 rounded-full flex items-center justify-end pr-2"
                     style={{ width: `${barWidth}%` }}

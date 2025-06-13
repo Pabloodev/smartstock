@@ -1,9 +1,9 @@
 "use client";
 
 import { cn } from "@/app/lib/utils";
-import { Button } from "@/app/ui/components/button";
-import { Input } from "@/app/ui/components/input";
-import { Label } from "@/app/ui/components/label";
+import { Button } from "@/app/ui/components/Button";
+import { Input } from "@/app/ui/components/Input";
+import { Label } from "@/app/ui/components/Label";
 import { useState } from "react";
 import { useActionState } from "react";
 import { EyeClosed, Eye } from "lucide-react";
@@ -107,7 +107,7 @@ export function RegisterForm({ className, ...props }) {
         )}
 
         <Link href="/"> 
-          <button className="underline underline-offset-1 text-gray-300 hover:text-white cursor-pointer">
+          <button type="button" className="underline underline-offset-1 text-gray-300 hover:text-white cursor-pointer">
             <p>Já tem uma conta, faça login.</p>
           </button>
         </Link>

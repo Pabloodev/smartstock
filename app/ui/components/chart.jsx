@@ -28,16 +28,16 @@ export default function Chart() {
   }, []);
 
   return (
-    <div className="bg-zinc-950 text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center">
+    <div className="bg-white text-black p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center border-2 border-blue-500">
       <div>
         <h1 className="text-lg font-medium">Total de equipamentos retirados</h1>
-        <p className="text-gray-300">Contagem total a partir de junho de 2025.</p>
+        <p className="text-gray-500">Contagem total a partir de junho de 2025.</p>
       </div>
 
-      <div className="text-center bg-zinc-900 w-40 h-40 p-10 rounded-full border-5 border-blue-500 flex flex-col justify-center items-center">
+      <div className="text-center bg-white w-40 h-40 p-10 rounded-full border-5 border-blue-500 flex flex-col justify-center items-center">
         {/* Display the total from the state */}
         <span className="text-5xl font-bold">{total}</span>
-        <p className="text-sm text-gray-300">Equipamentos</p>
+        <p className="text-sm text-gray-500">Equipamentos</p>
       </div>
 
       <div className='flex items-center gap-3'>

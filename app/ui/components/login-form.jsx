@@ -90,8 +90,8 @@ export function LoginForm({ className, ...props }) {
           <p className="text-pink-600 text-sm">{state.message}</p>
         )}
 
-        <Link href="/register"> 
-          <button className="underline underline-offset-1 text-gray-300 hover:text-white cursor-pointer">
+        <Link href="/register">
+          <button type="button" className="underline underline-offset-1 text-gray-300 hover:text-white cursor-pointer">
             <p>Ainda não tem uma conta? faça o cadastro.</p>
           </button>
         </Link>
