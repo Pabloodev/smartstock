@@ -1,5 +1,4 @@
-import { ArrowRight, Check } from 'lucide-react';
-import Link from 'next/link';
+import { LoginForm } from "../ui/components/login-form"
 
 export default function LoginPage() {
   return (
@@ -11,20 +10,8 @@ export default function LoginPage() {
           <span className="text-end text-orange-300">por Athon Telecom</span>
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-lg flex flex-col gap-5">
-            <h2 className="text-5xl font-medium">Nossa <span className='text-gradient'>Gestão</span>, de um Jeito Muito Mais Facil.</h2>
-
-            <Link href="/home">
-              <button className='cursor-pointer flex items-center gap-3 justify-center bg-white text-blue-900 px-6 py-2 rounded hover:bg-gray-200 transition'>
-                <span>Acessar app</span>
-                <ArrowRight />
-              </button>
-            </Link>
-
-            <footer className="absolute bottom-4 left-4 text-xs text-white">
-              © 2025 Athon Telecom · v1.2.3
-            </footer>
-
+          <div className="w-full max-w-xs">
+            <LoginForm />
           </div>
         </div>
       </div>

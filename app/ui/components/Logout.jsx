@@ -14,12 +14,12 @@ export default function Logout() {
     })
 
 
-    router.push('/')
+    router.push('/login')
   }
 
   return (
     <div>
-      <button className='text-red-400 cursor-pointer' onClick={handleLogout}>
+      <button className='text-red-400 cursor-pointer' title='Deslogar' onClick={handleLogout}>
       <DoorOpen />
       </button>
     </div>

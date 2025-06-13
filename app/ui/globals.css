@@ -143,3 +143,9 @@ body {
     --chart-5: oklch(0.645 0.246 16.439);
   }
 }
+
+.text-gradient {
+  background: linear-gradient(to right, #4bcdf5 0%, #EE71FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
