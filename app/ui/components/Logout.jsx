@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import { DoorOpen } from 'lucide-react';
 
 export default function Logout() {
 
@@ -19,8 +19,8 @@ export default function Logout() {
 
   return (
     <div>
-      <button onClick={handleLogout}>
-        <p>Deslogar</p>
+      <button className='text-red-400 cursor-pointer' onClick={handleLogout}>
+      <DoorOpen />
       </button>
     </div>
   )

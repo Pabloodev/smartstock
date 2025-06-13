@@ -10,7 +10,7 @@ export default function ChartBuilding() {
       </div>
 
       <div className="text-center w-40 h-40 p-10 flex flex-col justify-center items-center">
-      <Pickaxe size={80} className='text-gray-300'/>
+      <Pickaxe size={80} className='text-gray-900'/>
       </div>
 
       <div className='flex items-center gap-3'>
