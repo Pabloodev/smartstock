@@ -64,35 +64,99 @@ export default function Page() {
               {resultado.erro}
             </div>
           ) : (
-            <div className="flex flex-col gap-5 border-1 border-white rounded-lg text-white w-[800px] p-4 mt-4 rounded-lg">
-              <div>
-                <p className="text-green-500 text-center">Aparelho baixado com sucesso!</p>
-              </div>
-
-              <p><span className="text-gray-300">ID Contrato:</span> {resultado.id_contrato}</p>
-              <p><span className="text-gray-300">ID OS:</span> {resultado.id_os}</p>
-              <p><span className="text-gray-300">ID Patrimonio:</span> {resultado.id_patrimonio}</p>
-              <p><span className="text-gray-300">ID Diagnósitico:</span> {resultado.id_su_diagnostico}</p>
-
-              <p><span className="text-gray-300">Data de abertura:</span> {formatarData(resultado.data_abertura)}</p>
-              <p><span className="text-gray-300">Data de agendamento:</span> {formatarData(resultado.data_agenda)}</p>
-              <p><span className="text-gray-300">Data de fechamento:</span> {formatarData(resultado.data_fechamento)}</p>
-
-              <p><span className="text-gray-300">Aparelho:</span> {resultado.descricao}</p>
-              <p><span className="text-gray-300">Número patrimonio:</span> {resultado.numero_patrimonial}</p>
-              <p><span className="text-gray-300">Serial:</span> {resultado.serial}</p>
-              <p><span className="text-gray-300">Protocolo:</span> {resultado.protocolo}</p>
-              <p><span className="text-gray-300">Valor do aparelho:</span> {resultado.valor_unitario}</p>
-
-
-              <p><span className="text-gray-300">Técnico que retirou:</span> {resultado.nome_tecnico}</p>
-              <p><span className="text-gray-300">Status comodato:</span> {resultado.status_comodato}</p>
+            <div className="mt-8 overflow-x-auto text-white">
+              <h3 className="text-xl text-green-200 font-bold mb-4">Aparelho baixado com sucesso!</h3>
+              <table className="min-w-[1200px] text-sm text-left border-collapse">
+                <thead className="bg-gray-800 text-gray-400 uppercase text-xs">
+                  <tr>
+                    <th className="px-4 py-2">ID Contrato</th>
+                    <th className="px-4 py-2">ID OS</th>
+                    <th className="px-4 py-2">ID Patrimônio</th>
+                    <th className="px-4 py-2">ID Diagnóstico</th>
+                    <th className="px-4 py-2">Data Abertura</th>
+                    <th className="px-4 py-2">Data Agendamento</th>
+                    <th className="px-4 py-2">Data Fechamento</th>
+                    <th className="px-4 py-2">Aparelho</th>
+                    <th className="px-4 py-2">Nº Patrimonial</th>
+                    <th className="px-4 py-2">Serial</th>
+                    <th className="px-4 py-2">Protocolo</th>
+                    <th className="px-4 py-2" >Valor do Aparelho</th>
+                    <th className="px-4 py-2">Técnico</th>
+                    <th className="px-4 py-2">Status Comodato</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-gray-900 border-b border-gray-700 hover:bg-gray-800">
+                    <td className="px-4 py-2">{resultado.id_contrato}</td>
+                    <td className="px-4 py-2">{resultado.id_os}</td>
+                    <td className="px-4 py-2">{resultado.id_patrimonio}</td>
+                    <td className="px-4 py-2">{resultado.id_su_diagnostico}</td>
+                    <td className="px-4 py-2">{formatarData(resultado.data_abertura)}</td>
+                    <td className="px-4 py-2">{formatarData(resultado.data_agenda)}</td>
+                    <td className="px-4 py-2">{formatarData(resultado.data_fechamento)}</td>
+                    <td className="px-4 py-2">{resultado.descricao}</td>
+                    <td className="px-4 py-2">{resultado.numero_patrimonial}</td>
+                    <td className="px-4 py-2">{resultado.serial}</td>
+                    <td className="px-4 py-2">{resultado.protocolo}</td>
+                    <td className="px-4 py-2">
+                      {new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                      }).format(resultado.valor_unitario)}
+                    </td>
+                    <td className="px-4 py-2">{resultado.nome_tecnico}</td>
+                    <td className="px-4 py-2">{resultado.status_comodato}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p className="text-gray-400 mt-2">Total de registros: 1</p>
             </div>
           )
         ) : (
-          <div className="pt-10">
-            <span>Passe o leitor bip no código de barras do MAC do aparelho</span>
+          <div className="p-10">
+            <table className="min-w-[1200px] text-sm text-left border-collapse">
+              <thead className="bg-gray-800 text-gray-400 uppercase text-xs">
+                <tr>
+                  <th className="px-4 py-2">ID Contrato</th>
+                  <th className="px-4 py-2">ID OS</th>
+                  <th className="px-4 py-2">ID Patrimônio</th>
+                  <th className="px-4 py-2">ID Diagnóstico</th>
+                  <th className="px-4 py-2">Data Abertura</th>
+                  <th className="px-4 py-2">Data Agendamento</th>
+                  <th className="px-4 py-2">Data Fechamento</th>
+                  <th className="px-4 py-2">Aparelho</th>
+                  <th className="px-4 py-2">Nº Patrimonial</th>
+                  <th className="px-4 py-2">Serial</th>
+                  <th className="px-4 py-2">Protocolo</th>
+                  <th className="px-4 py-2" >Valor do Aparelho</th>
+                  <th className="px-4 py-2">Técnico</th>
+                  <th className="px-4 py-2">Status Comodato</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-gray-900 border-b border-gray-700 hover:bg-gray-800">
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                  <td className="px-4 py-4">--</td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="pt-10 text-white">
+              <span>Passe o leitor bip no código de barras do MAC do aparelho</span>
+            </div>
           </div>
+
         )}
       </div>
     </div>

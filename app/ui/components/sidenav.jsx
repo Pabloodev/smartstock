@@ -5,7 +5,7 @@ import Logout from "./Logout";
 
 export default function Sidenav() {
   return (
-    <div className="bg-gray-900 h-screen w-[240px] border-r border-white text-white p-10 flex flex-col justify-between items-center gap-10">
+    <div className="bg-gray-900 h-screen w-[240px] border-r border-blue-400 text-white p-10 flex flex-col justify-between items-center gap-10">
 
       <div className="w-full">
 

@@ -6,6 +6,23 @@ import { useEffect, useState } from "react";
 export default function Page() {
   const [registros, setRegistros] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [tipoSelecionado, setTipoSelecionado] = useState("EQUIPAMENTO_DEVOLVIDO");
+
+  const diagnosticos = [
+    "EQUIPAMENTO_DEVOLVIDO",
+    "TROCA_DO_EQUIPAMENTO",
+    "TROCA_REFEITO_CONECTOR_TROCA_DE_EQUIPAMENTO",
+    "REDE_MESH_TROCA_DE_EQUIPAMENTO",
+    "MUDANCA_DE_LOCAL_DO_EQUIPAMENTO_TROCA_DE_EQUIPAMENTO",
+    "MUDANCA_DE_ENDERECO_TROCA_DO_EQUIPAMENTO",
+    "DESCONECTADO_DA_CAIXA_TROCA_DO_EQUIPAMENTO",
+    "TROCA_DO_CABEAMENTO_TROCA_DO_EQUIPAMENTO",
+    "REATIVACAO_TROCA_DO_EQUIPAMENTO",
+    "MUDANCA_DE_ENDERECO_CABEAMENTO_EXISTENTE_TROCA_DO_EQUIPAMENTO",
+    "REMANEJAMENTO_COM_SOBRA_TECNICA_TROCA_DO_EQUIPAMENTO",
+    "FIBRA_ATENUADA_TROCA_DO_EQUIPAMENTO"
+  ];
+
 
   useEffect(() => {
     async function fetchData() {
@@ -33,6 +50,21 @@ export default function Page() {
   return (
     <div className="bg-[#0f172a] text-white p-8">
       <h1 className="text-2xl font-semibold mb-6">Registros de Equipamentos Devolvidos</h1>
+
+      <div className="mb-6">
+        <label className="text-sm mr-2">Tipo de Diagnóstico:</label>
+        <select
+          value={tipoSelecionado}
+          onChange={(e) => setTipoSelecionado(e.target.value)}
+          className="bg-slate-800 text-white border border-slate-700 px-4 py-2 rounded"
+        >
+          {diagnosticos.map((tipo) => (
+            <option key={tipo} value={tipo}>
+              {tipo}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {loading ? (
         <p className="text-gray-400">Carregando registros...</p>

@@ -22,7 +22,7 @@ export default function LoginPage() {
             </Link>
 
             <footer className="absolute bottom-4 left-4 text-xs text-white">
-              © 2025 Athon Telecom · v1.2.3
+              © 2025 Athon Telecom · Beta
             </footer>
 
           </div>
