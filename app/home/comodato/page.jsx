@@ -37,12 +37,21 @@ export default function Page() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mac }),
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log("Resultado:", data[0]);
-        setResultado(data[0]);
+      .then(async (res) => {
+        const data = await res.json();
+
+        if (!res.ok) {
+          setResultado({ erro: data.erro || "Erro desconhecido." });
+          return;
+        }
+
+        if (Array.isArray(data)) {
+          setResultado(data[0]);
+        } else {
+          setResultado({ erro: "Formato inesperado de resposta da API." });
+        }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Erro na consulta:", err);
         setResultado({ erro: "Erro ao consultar MAC" });
       });
@@ -60,9 +69,48 @@ export default function Page() {
       <div>
         {resultado ? (
           resultado.erro ? (
-            <div className="mt-4 text-red-500 font-semibold">
-              {resultado.erro}
+            <div className="p-10">
+              <h3 className="text-xl text-red-200 font-bold mb-4">{resultado.erro}</h3>
+              <table className="min-w-[1200px] text-sm text-left border-collapse">
+                <thead className="bg-gray-800 text-gray-400 uppercase text-xs">
+                  <tr>
+                    <th className="px-4 py-2">ID Contrato</th>
+                    <th className="px-4 py-2">ID OS</th>
+                    <th className="px-4 py-2">ID Patrimônio</th>
+                    <th className="px-4 py-2">ID Diagnóstico</th>
+                    <th className="px-4 py-2">Data Abertura</th>
+                    <th className="px-4 py-2">Data Agendamento</th>
+                    <th className="px-4 py-2">Data Fechamento</th>
+                    <th className="px-4 py-2">Aparelho</th>
+                    <th className="px-4 py-2">Nº Patrimonial</th>
+                    <th className="px-4 py-2">Serial</th>
+                    <th className="px-4 py-2">Protocolo</th>
+                    <th className="px-4 py-2" >Valor do Aparelho</th>
+                    <th className="px-4 py-2">Técnico</th>
+                    <th className="px-4 py-2">Status Comodato</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-gray-900 border-b border-gray-700">
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                    <td className="px-4 py-4">--</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+
           ) : (
             <div className="mt-8 overflow-x-auto text-white">
               <h3 className="text-xl text-green-200 font-bold mb-4">Aparelho baixado com sucesso!</h3>

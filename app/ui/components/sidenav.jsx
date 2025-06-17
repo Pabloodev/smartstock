@@ -41,7 +41,7 @@ export default function Sidenav() {
   const pathname = usePathname();
 
   return (
-    <div className="bg-gray-900 h-screen w-[240px] border-r border-blue-400 text-white p-10 flex flex-col justify-between items-center gap-10">
+    <div className="bg-gray-900 h-screen w-[250px] border-r border-blue-400 text-white p-10 flex flex-col justify-between items-center gap-10">
       <div className="w-full">
         <div className="flex items-center mb-10">
           <div className="flex items-center gap-3">
@@ -50,7 +50,7 @@ export default function Sidenav() {
           </div>
         </div>
 
-        <ul className="flex flex-col gap-4 w-full">
+        <ul className="flex flex-col gap-5 w-full">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
 

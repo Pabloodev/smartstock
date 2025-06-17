@@ -67,7 +67,7 @@ export default function UpdateAccount() {
         className="w-full p-2 border rounded"
       />
 
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      <button type="submit" className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
         Atualizar
       </button>
 

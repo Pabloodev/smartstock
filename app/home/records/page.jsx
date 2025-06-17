@@ -23,29 +23,37 @@ export default function Page() {
     "FIBRA_ATENUADA_TROCA_DO_EQUIPAMENTO"
   ];
 
+  function formatarData(dataString) {
+    const data = new Date(dataString);
+    return new Intl.DateTimeFormat("pt-BR").format(data);
+  }
+
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       try {
-        const res = await fetch("/api/records");
+        const res = await fetch(`/api/records?assunto=${tipoSelecionado}`);
         const data = await res.json();
 
-        if (!data || !Array.isArray(data["EQUIPAMENTO_DEVOLVIDO"])) {
+        if (!data || !Array.isArray(data[tipoSelecionado])) {
           console.error("Formato inesperado:", data);
           setRegistros([]);
           return;
         }
 
-        setRegistros(data["EQUIPAMENTO_DEVOLVIDO"]);
+        setRegistros(data[tipoSelecionado]);
       } catch (err) {
         console.error("Erro ao buscar dados:", err);
+        setRegistros([]);
       } finally {
         setLoading(false);
       }
     }
 
     fetchData();
-  }, []);
+  }, [tipoSelecionado]); // <== importante
+
 
   return (
     <div className="bg-[#0f172a] text-white p-8">
@@ -75,8 +83,11 @@ export default function Page() {
               <tr>
                 <th className="px-4 py-2 text-left">ID</th>
                 <th className="px-4 py-2 text-left">Data Abertura</th>
+                <th className="px-4 py-2 text-left">Data Fechamento</th>
+                <th className="px-4 py-2 text-left">ID Cliente</th>
+                <th className="px-4 py-2 text-left">ID Contrato</th>
                 <th className="px-4 py-2 text-left">Cliente</th>
-                <th className="px-4 py-2 text-left">Descrição</th>
+                <th className="px-4 py-2 text-left">ID MAC</th>
                 <th className="px-4 py-2 text-left">Status</th>
                 <th className="px-4 py-2 text-left">OS</th>
               </tr>
@@ -88,10 +99,13 @@ export default function Page() {
                   className={idx % 2 === 0 ? "bg-slate-900" : "bg-slate-800"}
                 >
                   <td className="px-4 py-2">{registro.id ?? "—"}</td>
-                  <td className="px-4 py-2">{registro.data_abertura?.slice(0, 10) ?? "—"}</td>
+                  <td className="px-4 py-2">{formatarData(registro.data_abertura)}</td>
+                  <td className="px-4 py-2">{formatarData(registro.data_fechamento)}</td>
+                  <td className="px-4 py-2">{registro.id_cliente}</td>
+                  <td className="px-4 py-2">{registro.id_contrato}</td>
                   <td className="px-4 py-2">{registro.nome_cliente ?? "—"}</td>
-                  <td className="px-4 py-2">{registro.descricao ?? "—"}</td>
-                  <td className="px-4 py-2">{registro.status_comodato ?? "—"}</td>
+                  <td className="px-4 py-2">{registro.id_mac ?? "—"}</td>
+                  <td className="px-4 py-2 text-green-200">{registro.status_comodato ?? "—"}</td>
                   <td className="px-4 py-2">{registro.id_os ?? "—"}</td>
                 </tr>
               ))}

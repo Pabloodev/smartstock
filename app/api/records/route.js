@@ -10,6 +10,7 @@ export async function GET() {
       headers: { "Content-Type": "application/json" },
       status: 200,
     });
+    
   } catch (error) {
     return new Response(
       JSON.stringify({ erro: "Erro ao buscar dados da API externa" }),

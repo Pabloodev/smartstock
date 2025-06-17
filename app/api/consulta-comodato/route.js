@@ -1,11 +1,26 @@
 export async function POST(req) {
-  const body = await req.json(); // lê o corpo da requisição
-  const { mac } = body;
+  try {
+    const body = await req.json();
+    const { mac } = body;
 
-  const response = await fetch(`http://10.28.18.58:9000/consulta-comodato?mac=${encodeURIComponent(mac)}`, {
-    method: "GET",
-  });
+    if (!mac) {
+      return new Response(JSON.stringify({ erro: "MAC não fornecido." }), { status: 400 });
+    }
 
-  const data = await response.json();
-  return Response.json(data);
+    const response = await fetch(`http://10.28.18.58:9000/consulta-comodato?mac=${encodeURIComponent(mac)}`);
+    const data = await response.json();
+
+    if (!Array.isArray(data)) {
+      return new Response(JSON.stringify({ erro: "Aparelho já registrado em estoque." }), {
+        status: 404,
+      });
+    }
+
+    return Response.json(data);
+
+  } catch (error) {
+    return new Response(JSON.stringify({ erro: "Esse MAC já tem baixa no estoque." }), {
+      status: 400,
+    });
+  }
 }
