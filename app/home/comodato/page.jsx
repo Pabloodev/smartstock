@@ -86,7 +86,7 @@ export default function Page() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-gray-900 border-b border-gray-700 hover:bg-gray-800">
+                  <tr className="bg-gray-900 border-b border-gray-70">
                     <td className="px-4 py-2">{resultado.id_contrato}</td>
                     <td className="px-4 py-2">{resultado.id_os}</td>
                     <td className="px-4 py-2">{resultado.id_patrimonio}</td>
@@ -134,7 +134,7 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-gray-900 border-b border-gray-700 hover:bg-gray-800">
+                <tr className="bg-gray-900 border-b border-gray-700">
                   <td className="px-4 py-4">--</td>
                   <td className="px-4 py-4">--</td>
                   <td className="px-4 py-4">--</td>
