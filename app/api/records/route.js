@@ -1,6 +1,8 @@
-// app/api/registros/route.ts
-export async function GET() {
-  const url = "http://10.28.18.58:9000/dados-tabelas?nome_tabela=EQUIPAMENTO_DEVOLVIDO&data_coluna=data_abertura&ordem=data_abertura DESC&limite=10";
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const assunto = searchParams.get("assunto") || "EQUIPAMENTO_DEVOLVIDO";
+
+  const url = `http://10.28.18.58:9000/dados-tabelas?nome_tabela=${assunto}&data_coluna=data_abertura&ordem=data_abertura DESC&limite=10`;
 
   try {
     const res = await fetch(url);

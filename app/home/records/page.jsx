@@ -9,18 +9,18 @@ export default function Page() {
   const [tipoSelecionado, setTipoSelecionado] = useState("EQUIPAMENTO_DEVOLVIDO");
 
   const diagnosticos = [
-    "EQUIPAMENTO_DEVOLVIDO",
-    "TROCA_DO_EQUIPAMENTO",
-    "TROCA_REFEITO_CONECTOR_TROCA_DE_EQUIPAMENTO",
-    "REDE_MESH_TROCA_DE_EQUIPAMENTO",
-    "MUDANCA_DE_LOCAL_DO_EQUIPAMENTO_TROCA_DE_EQUIPAMENTO",
-    "MUDANCA_DE_ENDERECO_TROCA_DO_EQUIPAMENTO",
-    "DESCONECTADO_DA_CAIXA_TROCA_DO_EQUIPAMENTO",
-    "TROCA_DO_CABEAMENTO_TROCA_DO_EQUIPAMENTO",
-    "REATIVACAO_TROCA_DO_EQUIPAMENTO",
-    "MUDANCA_DE_ENDERECO_CABEAMENTO_EXISTENTE_TROCA_DO_EQUIPAMENTO",
-    "REMANEJAMENTO_COM_SOBRA_TECNICA_TROCA_DO_EQUIPAMENTO",
-    "FIBRA_ATENUADA_TROCA_DO_EQUIPAMENTO"
+    { label: "Equipamento Devolvido", value: "EQUIPAMENTO_DEVOLVIDO" },
+    { label: "Troca do Equipamento", value: "TROCA_DO_EQUIPAMENTO" },
+    { label: "Troca/Refeito Conector", value: "TROCA_REFEITO_CONECTOR_TROCA_DE_EQUIPAMENTO" },
+    { label: "Rede Mesh", value: "REDE_MESH_TROCA_DE_EQUIPAMENTO" },
+    { label: "Mudança Local Equipamento", value: "MUDANCA_DE_LOCAL_DO_EQUIPAMENTO_TROCA_DE_EQUIPAMENTO" },
+    { label: "Mudança de Endereço", value: "MUDANCA_DE_ENDERECO_TROCA_DO_EQUIPAMENTO" },
+    { label: "Desconectado da Caixa", value: "DESCONECTADO_DA_CAIXA_TROCA_DO_EQUIPAMENTO" },
+    { label: "Troca do Cabeamento", value: "TROCA_DO_CABEAMENTO_TROCA_DO_EQUIPAMENTO" },
+    { label: "Reativação", value: "REATIVACAO_TROCA_DO_EQUIPAMENTO" },
+    { label: "Mudança + Cabeamento Existente", value: "MUDANCA_DE_ENDERECO_CABEAMENTO_EXISTENTE_TROCA_DO_EQUIPAMENTO" },
+    { label: "Remanejamento c/ Sobra Técnica", value: "REMANEJAMENTO_COM_SOBRA_TECNICA_TROCA_DO_EQUIPAMENTO" },
+    { label: "Fibra Atenuada", value: "FIBRA_ATENUADA_TROCA_DO_EQUIPAMENTO" },
   ];
 
   function formatarData(dataString) {
@@ -36,13 +36,8 @@ export default function Page() {
         const res = await fetch(`/api/records?assunto=${tipoSelecionado}`);
         const data = await res.json();
 
-        if (!data || !Array.isArray(data[tipoSelecionado])) {
-          console.error("Formato inesperado:", data);
-          setRegistros([]);
-          return;
-        }
-
-        setRegistros(data[tipoSelecionado]);
+        console.log("Dados recebidos:", data);
+        setRegistros(data[tipoSelecionado] || []);
       } catch (err) {
         console.error("Erro ao buscar dados:", err);
         setRegistros([]);
@@ -52,7 +47,7 @@ export default function Page() {
     }
 
     fetchData();
-  }, [tipoSelecionado]); // <== importante
+  }, [tipoSelecionado]);
 
 
   return (
@@ -63,12 +58,12 @@ export default function Page() {
         <label className="text-sm mr-2">Tipo de Diagnóstico:</label>
         <select
           value={tipoSelecionado}
-          onChange={(e) => setTipoSelecionado(e.target.value)}
+          onChange={((e) => setTipoSelecionado(e.target.value))}
           className="bg-slate-800 text-white border border-slate-700 px-4 py-2 rounded"
         >
-          {diagnosticos.map((tipo) => (
-            <option key={tipo} value={tipo}>
-              {tipo}
+          {diagnosticos.map((d) => (
+            <option key={d.value} value={d.value}>
+              {d.label}
             </option>
           ))}
         </select>
