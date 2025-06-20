@@ -1,4 +1,3 @@
-// components/AtualizarUsuarioForm.jsx
 'use client'
 
 import { useState } from 'react'
@@ -39,8 +38,8 @@ export default function UpdateAccount() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto p-4 border rounded-md shadow">
-      <h2 className="text-xl font-bold">Atualizar Usuário</h2>
+    <form onSubmit={handleSubmit} className="space-y-4 shadow">
+      <h2 className="text-lg font-bold">Atualizar Usuário</h2>
 
       <input
         type="email"
@@ -48,7 +47,7 @@ export default function UpdateAccount() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        className="w-full p-2 border rounded"
+        className="w-full p-2 border-b rounded"
       />
 
       <input
@@ -56,7 +55,7 @@ export default function UpdateAccount() {
         placeholder="Novo Nome (opcional)"
         value={nome}
         onChange={(e) => setNome(e.target.value)}
-        className="w-full p-2 border rounded"
+        className="w-full p-2 border-b rounded"
       />
 
       <input
@@ -64,7 +63,7 @@ export default function UpdateAccount() {
         placeholder="Nova Senha (opcional)"
         value={senha}
         onChange={(e) => setSenha(e.target.value)}
-        className="w-full p-2 border rounded"
+        className="w-full p-2 border-b rounded"
       />
 
       <button type="submit" className="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
