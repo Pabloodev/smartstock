@@ -18,15 +18,15 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4 text-white">Enviar Feedback</h2>
+    <div className="p-5 shadow text-gray-900 dark:text-white p-5">
+      <h2 className="text-xl font-semibold mb-4">Enviar Feedback</h2>
 
-      <label className="text-sm text-slate-300">Comentário:</label>
+      <label className="text-sm text-gray-800 dark:text-gray-300">Comentário:</label>
       <textarea
         value={comentario}
         onChange={(e) => setComentario(e.target.value)}
         rows={4}
-        className="w-full mt-1 p-2 bg-slate-800 text-white rounded border border-slate-600"
+        className="w-full mt-1 p-2 bg-white dark:bg-slate-800 text-gray-900 dark:text-white rounded border border-slate-300"
         placeholder="Digite sua sugestão, elogio ou crítica..."
       />
 

@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 export async function register(formData) {
-  const nome = formData.get("nome");
-  const email = formData.get("email");
-  const senha = formData.get("senha");
+  const user = formData.get("user")?.toString();
+  const email = formData.get("email")?.toString();
+  const senha = formData.get("senha")?.toString();
 
   if (!email || !senha) {
     return { error: true, message: "Usuário e senha são obrigatórios." };
@@ -17,17 +17,16 @@ export async function register(formData) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ nome, email, senha }),
+    body: JSON.stringify({ user, email, senha }),
   });
 
   if (!res.ok) {
-    return { error: true, message: "Login ou senha incorretos." };
+    return { error: true, message: "Erro ao registrar usuário." };
   }
-
 
   const { token } = await res.json();
 
-  const cookieStore = await cookies();
+  const cookieStore = cookies();
   cookieStore.set("token", token, {
     httpOnly: true,
     secure: false,
@@ -35,26 +34,23 @@ export async function register(formData) {
     path: "/",
   });
 
-  cookieStore.set("nome", nome, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    path: "/",
-  });
+  if (user) {
+    cookieStore.set("user", user, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      path: "/",
+    });
+  }
 
-  cookieStore.set("email", email, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    path: "/",
-  });
-
-  cookieStore.set("senha", senha, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    path: "/",
-  });
+  if (email) {
+    cookieStore.set("email", email, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      path: "/",
+    });
+  }
 
   redirect("/");
 }

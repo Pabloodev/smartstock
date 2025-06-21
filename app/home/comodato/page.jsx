@@ -59,20 +59,20 @@ export default function Page() {
 
   return (
     <div className="p-10">
-      <h2 className="text-xl font-bold mb-4">Escaneie o QR Code do MAC:</h2>
+      <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Escaneie o QR Code do MAC:</h2>
       <input
         type="text"
         ref={inputRef}
         placeholder="Escaneie com o maquina ou digite o mac manualmente..."
-        className="border border-blue-500 p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 max-w-md rounded-sm"
+        className="border border-blue-500 p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 max-w-md rounded-sm text-gray-900 dark:text-white"
       />
       <div>
         {resultado ? (
           resultado.erro ? (
             <div className="p-10">
               <h3 className="text-xl text-red-200 font-bold mb-4">{resultado.erro}</h3>
-              <table className="min-w-[1200px] text-sm text-left border-collapse">
-                <thead className="bg-gray-800 text-gray-400 uppercase text-xs">
+              <table className="min-w-[1200px] text-sm text-left border-collapse rounded-sm">
+                <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs rounded-lg">
                   <tr>
                     <th className="px-4 py-2">ID Contrato</th>
                     <th className="px-4 py-2">ID OS</th>
@@ -114,8 +114,8 @@ export default function Page() {
           ) : (
             <div className="mt-8 overflow-x-auto text-white">
               <h3 className="text-xl text-green-200 font-bold mb-4">Aparelho baixado com sucesso!</h3>
-              <table className="min-w-[1200px] text-sm text-left border-collapse">
-                <thead className="bg-gray-800 text-gray-400 uppercase text-xs">
+              <table className="min-w-[1200px] text-sm text-left border-collapse rounded-lg">
+                <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs rounded-lg">
                   <tr>
                     <th className="px-4 py-2">ID Contrato</th>
                     <th className="px-4 py-2">ID OS</th>
@@ -134,7 +134,7 @@ export default function Page() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-gray-900 border-b border-gray-70">
+                  <tr className="bg-white dark:bg-gray-900 border-b border-gray-70">
                     <td className="px-4 py-2">{resultado.id_contrato}</td>
                     <td className="px-4 py-2">{resultado.id_os}</td>
                     <td className="px-4 py-2">{resultado.id_patrimonio}</td>
@@ -161,9 +161,9 @@ export default function Page() {
             </div>
           )
         ) : (
-          <div className="p-10">
-            <table className="min-w-[1200px] text-sm text-left border-collapse">
-              <thead className="bg-gray-800 text-gray-400 uppercase text-xs">
+          <div className="p-10 rounded-lg">
+            <table className="min-w-[1200px] text-sm text-left border-collapse rounded-lg">
+              <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs">
                 <tr>
                   <th className="px-4 py-2">ID Contrato</th>
                   <th className="px-4 py-2">ID OS</th>
@@ -182,7 +182,7 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-gray-900 border-b border-gray-700">
+                <tr className="bg-white dark:bg-gray-900 text-gray-900 border-b border-gray-700">
                   <td className="px-4 py-4">--</td>
                   <td className="px-4 py-4">--</td>
                   <td className="px-4 py-4">--</td>
@@ -200,7 +200,7 @@ export default function Page() {
                 </tr>
               </tbody>
             </table>
-            <div className="pt-10 text-white">
+            <div className="pt-10 text-gray-900 dark:text-white">
               <span>Passe o leitor bip no código de barras do MAC do aparelho</span>
             </div>
           </div>

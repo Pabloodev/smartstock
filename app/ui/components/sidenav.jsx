@@ -1,52 +1,45 @@
 'use client'
 
 import Link from "next/link";
-import { House, Router, Settings, LibraryBig } from 'lucide-react';
 import clsx from "clsx";
-import Logout from "./Logout";
 import { usePathname } from "next/navigation";
-
-const navLinks = [
-  {
-    href: "/home",
-    label: "Início",
-    title: "Voltar à tela inicial",
-    icon: <House className="text-green-400" size={25} />,
-    activeColor: "bg-blue-950",
-  },
-  {
-    href: "/home/comodato",
-    label: "Comodatos",
-    title: "Equipamentos em comodato",
-    icon: <Router className="text-orange-400" size={25} />,
-    activeColor: "bg-blue-950",
-  },
-  {
-    href: "/home/records",
-    label: "Registros",
-    title: "Registros",
-    icon: <LibraryBig className="text-blue-400" size={25} />,
-    activeColor: "bg-blue-950",
-  },
-  {
-    href: "/home/settings",
-    label: "Configurações",
-    title: "Configurações",
-    icon: <Settings className="text-purple-400" size={25} />,
-    activeColor: "bg-blue-950",
-  },
-];
+import { useState, useEffect } from "react";
+import { navLinks } from "@/lib/dataSite";
+import { User, UserCog } from "lucide-react";
+import Logout from "./Logout";
+import { ModeToggle } from "./modeToggle";
 
 export default function Sidenav() {
   const pathname = usePathname();
+  const [user, setUser] = useState("");
+  const [dropdownActive, setDropdownActive] = useState()
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('/api/me', {
+          credentials: 'include',
+        });
+        const data = await response.json();
+        console.log(data)
+        setUser(data.user || "Desconhecido");
+      } catch (err) {
+        console.error("Erro ao buscar usuário:", err);
+        setUser("Erro");
+      }
+    };
+
+    fetchUser();
+  }, []);
+
 
   return (
-    <div className="bg-gray-900 h-screen w-[250px] border-r border-blue-400 text-white p-10 flex flex-col justify-between items-center gap-10">
+    <div className="bg-white dark:bg-gray-900 h-screen w-[250px] border-r border-blue-400 text-black dark:text-white p-10 flex flex-col justify-between items-center gap-10">
       <div className="w-full">
         <div className="flex items-center mb-10">
           <div className="flex items-center gap-3">
             <img src="/athonfav.png" className="w-8" alt="Icon Athon Telecom" />
-            <p>Athon Telecom</p>
+            <p className="font-medium">Athon Telecom</p>
           </div>
         </div>
 
@@ -66,15 +59,34 @@ export default function Sidenav() {
                   )}
                 >
                   {link.icon}
-                  <span>{link.label}</span>
+                  <span className="font-medium">{link.label}</span>
                 </Link>
               </li>
             );
           })}
         </ul>
       </div>
+      <div className="relative flex flex-col items-start gap-5">
+        {dropdownActive && (
+          <div className="flex flex-col items-start gap-3 cursor-pointer">
+            <Logout />
+            <Link href={"/home/settings"} className="flex items-start gap-3 hover:text-blue-300 cursor-pointer">
+              <UserCog className="text-blue-300" />
+              <p>Editar Perfil</p>
+            </Link>
+          </div>
+        )}
+        <button
+          onClick={() => setDropdownActive(prev => !prev)}
+          className="cursor-pointer flex items-center gap-3 rounded-lg transition duration-300 transform hover:scale-105 hover:shadow-xl p-2 hover:text-red-300"
+        >
+          <User />
+          <p>{user ? user : "Carregando..."}</p>
+        </button>
+      </div>
 
-      <Logout />
+
+
     </div>
   );
 }

@@ -38,7 +38,7 @@ export default function UpdateAccount() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 shadow">
+    <form onSubmit={handleSubmit} className="space-y-4 shadow text-gray-900 dark:text-white p-5">
       <h2 className="text-lg font-bold">Atualizar Usuário</h2>
 
       <input

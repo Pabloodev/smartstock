@@ -51,15 +51,15 @@ export default function Page() {
 
 
   return (
-    <div className="bg-[#0f172a] text-white p-8">
-      <h1 className="text-2xl font-semibold mb-6">Registros de Equipamentos Devolvidos</h1>
+    <div className="bg-white shadow dark:bg-gray-900 text-gray-900 dark:text-white p-8 rounded-lg">
+      <h1 className="text-gray-900 dark:text-white text-2xl font-semibold mb-6">Registros de Equipamentos Devolvidos</h1>
 
       <div className="mb-6">
         <label className="text-sm mr-2">Tipo de Diagnóstico:</label>
         <select
           value={tipoSelecionado}
           onChange={((e) => setTipoSelecionado(e.target.value))}
-          className="bg-slate-800 text-white border border-slate-700 px-4 py-2 rounded"
+          className="dark:bg-slate-800 text-gray-900 dark:text-white cursor-pointer border border-slate-700 px-4 py-2 rounded"
         >
           {diagnosticos.map((d) => (
             <option key={d.value} value={d.value}>
@@ -74,7 +74,7 @@ export default function Page() {
       ) : (
         <div className="overflow-x-auto rounded-lg border border-slate-700">
           <table className="min-w-full table-auto text-sm">
-            <thead className="bg-slate-800 text-slate-300">
+            <thead className="dark:bg-slate-800 dark:text-gray-300 text-gray-900">
               <tr>
                 <th className="px-4 py-2 text-left">ID</th>
                 <th className="px-4 py-2 text-left">Data Abertura</th>
@@ -91,7 +91,7 @@ export default function Page() {
               {registros.map((registro, idx) => (
                 <tr
                   key={idx}
-                  className={idx % 2 === 0 ? "bg-slate-900" : "bg-slate-800"}
+                  className={idx % 2 === 0 ? "bg-white border border-t-gray-300 dark:bg-slate-900" : "bg-slate-800"}
                 >
                   <td className="px-4 py-2">{registro.id ?? "—"}</td>
                   <td className="px-4 py-2">{formatarData(registro.data_abertura)}</td>
@@ -100,7 +100,7 @@ export default function Page() {
                   <td className="px-4 py-2">{registro.id_contrato}</td>
                   <td className="px-4 py-2">{registro.nome_cliente ?? "—"}</td>
                   <td className="px-4 py-2">{registro.id_mac ?? "—"}</td>
-                  <td className="px-4 py-2 text-green-200">{registro.status_comodato ?? "—"}</td>
+                  <td className="px-4 py-2 text-green-400">{registro.status_comodato ?? "—"}</td>
                   <td className="px-4 py-2">{registro.id_os ?? "—"}</td>
                 </tr>
               ))}

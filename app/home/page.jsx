@@ -5,7 +5,7 @@ import ChartBuilding from "../ui/components/chartBuilding";
 export default function Page() {
   return (
     <div>
-      <h1 className="mb-10 text-3xl font-medium">Dashboards <span className="text-blue-400">Gerais</span></h1>
+      <h1 className="mb-10 text-3xl font-medium text-gray-900 dark:text-white">Dashboards <span className="text-blue-400">Gerais</span></h1>
 
       {/* Grid principal com 3 colunas */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2 items-center">

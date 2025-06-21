@@ -1,6 +1,7 @@
+
 import "./ui/globals.css"
 import { geistMono, geistSans } from "./ui/fonts";
-
+import { ThemeProvider } from "./ui/components/themeProvider";
 
 export const metadata = {
   title: "Smart Stock | Athon Telecom",
@@ -10,11 +11,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

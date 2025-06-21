@@ -39,7 +39,7 @@ export default function Chartbar() {
   };
 
   return (
-    <div className="bg-slate-800 text-white p-6 rounded-xl w-[500px] h-[700px] flex flex-col gap-6 border-2 border-blue-500">
+    <div className="bg-white dark:bg-slate-800 text-black dark:text-white p-6 rounded-xl w-[500px] h-[700px] flex flex-col gap-6 border-2 border-blue-500">
       <div>
         <h1 className="text-lg font-medium">Total de equipamentos retirados por OS</h1>
         <p className="text-gray-500 text-sm">Contagem total a partir de junho de 2025.</p>

@@ -50,13 +50,13 @@ export function RegisterForm({ className, ...props }) {
       <div className="grid gap-2">
 
         <div className="grid gap-3">
-          <Label htmlFor="email">Nome</Label>
+          <Label htmlFor="user">User</Label>
           <Input
-            id="nome"
+            id="user"
             type="text"
             placeholder="joao"
             required
-            name="nome"
+            name="user"
             className="invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-pink-500 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
           disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
           />
