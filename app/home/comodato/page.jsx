@@ -182,7 +182,7 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white dark:bg-gray-900 text-gray-900 border-b border-gray-700">
+                <tr className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-b border-gray-700">
                   <td className="px-4 py-4">--</td>
                   <td className="px-4 py-4">--</td>
                   <td className="px-4 py-4">--</td>

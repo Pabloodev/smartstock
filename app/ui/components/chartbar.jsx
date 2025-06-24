@@ -54,7 +54,7 @@ export default function Chartbar() {
           return (
             <div key={key} className="flex items-center gap-4 text-sm">
               {/* Nome da OS */}
-              <span className="w-1/3 truncate" title={formatLabel(key)}>
+              <span className="w-1/3 truncate font-medium" title={formatLabel(key)}>
                 {formatLabel(key)}
               </span>
               

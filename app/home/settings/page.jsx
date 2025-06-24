@@ -15,7 +15,7 @@ export default function Page() {
       <div className='gap-5 flex flex-col gap-10'>
         <div className='text-gray-900 dark:text-white flex items-center gap-3'>
           <h1 className='font-medium'>Tema do aplicativo: </h1>
-          <button onClick={() => setModalThemeOpen(!modalThemeOpen)} className='items-center gap-3 flex border-1 border-gray-300 shadow p-2 rounded-lg cursor-pointer'>
+          <button onClick={() => setModalThemeOpen(!modalThemeOpen)} className='hover:border-blue-500 transition duration-700 items-center gap-3 flex border-1 border-gray-300 shadow p-2 rounded-lg cursor-pointer'>
             <Paintbrush />
             <p>Selecionar tema</p>
           </button>

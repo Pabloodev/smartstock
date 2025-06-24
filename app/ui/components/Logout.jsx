@@ -21,7 +21,7 @@ export default function Logout() {
     <div>
       <button className='flex items-center justify-start gap-3 text-red-400 cursor-pointer' title='Deslogar' onClick={handleLogout}>
       <DoorOpen />
-      <p className='text-gray-900 dark:text-white hover:text-red-400'>Sair</p>
+      <p className='text-gray-900 dark:text-white dark:hover:text-red-400 hover:text-red-400'>Sair</p>
       </button>
     </div>
   )

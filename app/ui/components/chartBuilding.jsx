@@ -14,7 +14,7 @@ export default function ChartBuilding() {
       </div>
 
       <div className='flex items-center gap-3'>
-        <p className='text-sm'>Novidades em breve</p>
+        <p className='text-sm text-medium'>Novidades em breve</p>
       </div>
     </div>
   );
