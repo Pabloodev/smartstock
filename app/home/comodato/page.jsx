@@ -69,9 +69,9 @@ export default function Page() {
       <div>
         {resultado ? (
           resultado.erro ? (
-            <div className="p-10">
+            <div className="p-10 overflow-x-auto">
               <h3 className="text-xl text-red-200 font-bold mb-4">{resultado.erro}</h3>
-              <table className="min-w-[1200px] text-sm text-left border-collapse rounded-sm">
+              <table className="min-w-[1200px] text-sm text-left border-collapse rounded-sm min-w-full table-auto text-sm">
                 <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs rounded-lg">
                   <tr>
                     <th className="px-4 py-2">ID Contrato</th>
@@ -112,9 +112,9 @@ export default function Page() {
             </div>
 
           ) : (
-            <div className="mt-8 overflow-x-auto text-white">
+            <div className="mt-8 overflow-x-auto text-white overflow-x-auto">
               <h3 className="text-xl text-green-200 font-bold mb-4">Aparelho baixado com sucesso!</h3>
-              <table className="min-w-[1200px] text-sm text-left border-collapse rounded-lg">
+              <table className="min-w-[1200px] text-sm text-left border-collapse rounded-lg min-w-full table-auto text-sm">
                 <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs rounded-lg">
                   <tr>
                     <th className="px-4 py-2">ID Contrato</th>
@@ -161,8 +161,8 @@ export default function Page() {
             </div>
           )
         ) : (
-          <div className="p-10 rounded-lg">
-            <table className="min-w-[1200px] text-sm text-left border-collapse rounded-lg">
+          <div className="p-10 rounded-lg overflow-x-auto">
+            <table className="min-w-[1200px] text-sm text-left border-collapse rounded-lg min-w-full table-auto text-sm">
               <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs">
                 <tr>
                   <th className="px-4 py-2">ID Contrato</th>
