@@ -6,10 +6,10 @@ import { cookies } from "next/headers";
 export async function register(formData) {
   const user = formData.get("user")?.toString();
   const email = formData.get("email")?.toString();
-  const senha = formData.get("senha")?.toString();
+  const password = formData.get("password")?.toString();
 
-  if (!email || !senha) {
-    return { error: true, message: "Usuário e senha são obrigatórios." };
+  if (!email || !password) {
+    return { error: true, message: "Email e senha são obrigatórios." };
   }
 
   const res = await fetch("http://10.28.18.58:9000/registrar", {
@@ -17,7 +17,7 @@ export async function register(formData) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ user, email, senha }),
+    body: JSON.stringify({ user, email, password }),
   });
 
   if (!res.ok) {
@@ -52,5 +52,5 @@ export async function register(formData) {
     });
   }
 
-  redirect("/");
+  redirect("/login");
 }

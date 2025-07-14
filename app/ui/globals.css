@@ -149,3 +149,8 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+body {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.112) 2%, transparent 5%);
+  background-size: 5px 5px;
+}

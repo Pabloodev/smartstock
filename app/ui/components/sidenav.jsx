@@ -89,20 +89,6 @@ export default function Sidenav() {
       </div>
 
       <div className="flex items-center flex-col">
-        {/* Botão de tema visível apenas se tema atual for diferente */}
-        <div className="py-5 flex gap-4">
-          {currentTheme !== "dark" && (
-            <button onClick={() => applyTheme("dark")} className="cursor-pointer">
-              <Moon />
-            </button>
-          )}
-          {currentTheme !== "light" && (
-            <button onClick={() => applyTheme("light")} className="cursor-pointer">
-              <Sun />
-            </button>
-          )}
-        </div>
-
         <div className="relative flex flex-col items-start gap-5">
           {dropdownActive && (
             <div className="flex flex-col items-start gap-3 cursor-pointer">

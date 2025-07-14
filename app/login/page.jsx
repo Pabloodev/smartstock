@@ -2,8 +2,8 @@ import { LoginForm } from "../ui/components/login-form"
 
 export default function LoginPage() {
   return (
-    <div className="grid min-h-svh lg:grid-cols-2">
-      <div className="flex flex-col gap-4 p-6 md:p-10 bg-[#064b76]">
+    <div className="grid min-h-svh lg:grid-cols-2 bg-zinc-900">
+      <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex items-center justify-center gap-5">
           <img src="athonfav.png" alt="Icon Athon Telecom" className="w-10" />
           <h1 className="text-3xl font-medium">Smart Stock</h1>
@@ -17,7 +17,7 @@ export default function LoginPage() {
       </div>
       <div className="bg-muted relative hidden lg:block">
         <img
-          src="/hero-nova.png"
+          src="/herohome.png"
           alt="Image"
           className="absolute inset-0 h-full w-full object-cover"
         />

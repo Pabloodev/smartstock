@@ -2,14 +2,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Download, FileText, Sheet  } from 'lucide-react';
-
+import { Download, FileText, Sheet } from 'lucide-react';
 
 export default function Page() {
   const [registros, setRegistros] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tipoSelecionado, setTipoSelecionado] = useState("EQUIPAMENTO_DEVOLVIDO");
-  const [ dropDownActive, setDropDownActive ] = useState(false)
+  const [dropDownActive, setDropDownActive] = useState(false)
 
   const diagnosticos = [
     { label: "Equipamento Devolvido", value: "EQUIPAMENTO_DEVOLVIDO" },
@@ -53,6 +52,19 @@ export default function Page() {
   }, [tipoSelecionado]);
 
 
+  async function handleDownloadPDF() {
+    const res = await fetch("/api/records?assunto=${tipoSelecionado}");
+    const data = await res.json();
+    exportPDF(data);
+  }
+
+  async function handleDownloadXLSX() {
+    const res = await fetch("/api/records?assunto=${tipoSelecionado}");
+    const data = await res.json();
+    exportXLSX(data);
+  }
+
+
   return (
     <div className="bg-white shadow dark:bg-gray-900 text-gray-900 dark:text-white p-8 rounded-lg">
       <h1 className="text-gray-900 dark:text-white text-2xl font-semibold mb-6">Registros de Equipamentos Devolvidos</h1>
@@ -81,11 +93,11 @@ export default function Page() {
 
           {dropDownActive && (
             <div className="flex flex-col gap-2 text-start p-1 absolute bg-white dark:bg-slate-900 rounded-sm">
-              <button className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border-1 border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
+              <button onClick={handleDownloadPDF} className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border-1 border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
                 <span>Baixar em PDF</span>
                 <FileText />
               </button>
-              <button className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border-1 border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
+              <button onClick={handleDownloadXLSX} className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border-1 border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
                 <span>Baixar em XLSX</span>
                 <Sheet />
               </button>

@@ -3,6 +3,8 @@ import { NextResponse } from "next/server"
 const publicRoutes = [
   { path: "/login", whenAuthenticated: "redirect"},
   { path: "/register", whenAuthenticated: "redirect"},
+  { path: "/reset-password", whenAuthenticated: "redirect"},
+  { path: "/solicita-reset", whenAuthenticated: "redirect"},
   { path: "/", whenAuthenticated: "next"}
 ]
 

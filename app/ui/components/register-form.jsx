@@ -57,7 +57,7 @@ export function RegisterForm({ className, ...props }) {
             placeholder="joao"
             required
             name="user"
-            className="invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-pink-500 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
+            className="invalid:border-blue-300 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-blue-300 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
           disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
           />
         </div>
@@ -70,23 +70,23 @@ export function RegisterForm({ className, ...props }) {
             placeholder="joao.colaborador@gmail.com"
             required
             name="email"
-            className="invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-pink-500 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
+            className="invalid:border-blue-300 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-blue-300 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
           disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
           />
         </div>
 
         <div className="grid gap-3">
           <div className="flex items-center">
-            <Label htmlFor="senha">Senha</Label>
+            <Label htmlFor="password">Senha</Label>
           </div>
           <div className="flex gap-2">
             <Input
-              id="senha"
+              id="password"
               type={showPassword ? "text" : "password"}
               required
               placeholder="******"
-              name="senha"
-              className="invalid:border-pink-500 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-pink-500 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
+              name="password"
+              className="invalid:border-blue-300 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-blue-300 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
           disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
             />
             <button
@@ -106,7 +106,7 @@ export function RegisterForm({ className, ...props }) {
           <p className="text-pink-600 text-sm">{state.message}</p>
         )}
 
-        <Link href="/"> 
+        <Link href="/login"> 
           <button type="button" className="underline underline-offset-1 text-gray-300 hover:text-white cursor-pointer">
             <p>Já tem uma conta, faça login.</p>
           </button>
@@ -116,7 +116,7 @@ export function RegisterForm({ className, ...props }) {
           {isSubmitting ? (
             <Loading />
           ) : (
-            <Button type="submit" className="w-full cursor-pointer">
+            <Button type="submit" className="w-full cursor-pointer flex items-center gap-3 justify-center border-1 border-white px-6 py-2 rounded hover:bg-zinc-700 transition duration-700">
               Registrar
             </Button>
           )}

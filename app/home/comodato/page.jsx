@@ -70,7 +70,7 @@ export default function Page() {
         {resultado ? (
           resultado.erro ? (
             <div className="p-10 overflow-x-auto">
-              <h3 className="text-xl text-red-200 font-bold mb-4">{resultado.erro}</h3>
+              <h3 className="text-xl text-blue-400 dark:text-red-200 font-bold mb-4">{resultado.erro}</h3>
               <table className="min-w-[1200px] text-sm text-left border-collapse rounded-sm min-w-full table-auto text-sm">
                 <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs rounded-lg">
                   <tr>
@@ -91,7 +91,7 @@ export default function Page() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-gray-900 border-b border-gray-700">
+                  <tr className="dark:bg-gray-900 text-gray-900 dark:text-white border-b border-gray-700">
                     <td className="px-4 py-4">--</td>
                     <td className="px-4 py-4">--</td>
                     <td className="px-4 py-4">--</td>
@@ -113,7 +113,7 @@ export default function Page() {
 
           ) : (
             <div className="mt-8 overflow-x-auto text-white overflow-x-auto">
-              <h3 className="text-xl text-green-200 font-bold mb-4">Aparelho baixado com sucesso!</h3>
+              <h3 className="text-xl text-green-500 dark:text-green-200 font-bold mb-4">Aparelho baixado com sucesso!</h3>
               <table className="min-w-[1200px] text-sm text-left border-collapse rounded-lg min-w-full table-auto text-sm">
                 <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs rounded-lg">
                   <tr>
@@ -134,7 +134,7 @@ export default function Page() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white dark:bg-gray-900 border-b border-gray-70">
+                  <tr className="bg-white text-gray-600 dark:text-white dark:bg-gray-900 border-b border-gray-70">
                     <td className="px-4 py-2">{resultado.id_contrato}</td>
                     <td className="px-4 py-2">{resultado.id_os}</td>
                     <td className="px-4 py-2">{resultado.id_patrimonio}</td>

@@ -4,12 +4,11 @@ import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 export async function sign(formData) {
-  const email = formData.get("email")?.toString();
-  const senha = formData.get("senha")?.toString();
   const user = formData.get("user")?.toString();
+  const password = formData.get("password")?.toString();
 
-  if (!email || !senha) {
-    return { error: true, message: "Email e senha são obrigatórios." };
+  if (!user || !password) {
+    return { error: true, message: "Usuário e senha são obrigatórios." };
   }
 
   const res = await fetch("http://10.28.18.58:9000/login", {
@@ -17,7 +16,7 @@ export async function sign(formData) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, senha }),
+    body: JSON.stringify({ user, password }),
   });
 
   if (!res.ok) {
@@ -29,13 +28,6 @@ export async function sign(formData) {
   const cookieStore = cookies();
 
   cookieStore.set("token", token, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    path: "/",
-  });
-
-  cookieStore.set("email", email, {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
