@@ -15,7 +15,7 @@ export default function LoginPage() {
             <h2 className="text-5xl font-medium">Nossa <span className='text-gradient'>Gestão</span>, de um Jeito Muito Mais Facil.</h2>
 
             <Link href="/home">
-              <button className='cursor-pointer flex items-center gap-3 justify-center border-1 border-white px-6 py-2 rounded hover:bg-zinc-700 transition duration-700'>
+              <button className='cursor-pointer flex items-center gap-3 justify-center border-1 border-white px-6 py-2 rounded hover:bg-zinc-800 transition duration-700 hover:text-gradient'>
                 <span>Acessar app</span>
                 <ArrowRight />
               </button>
