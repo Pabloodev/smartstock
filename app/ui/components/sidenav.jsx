@@ -5,15 +5,14 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { navLinks } from "@/lib/dataSite";
-import { User, UserCog, Moon, Sun } from "lucide-react";
+import { User, UserCog } from "lucide-react";
 import Logout from "./Logout";
+import { cn } from "@/lib/utils";
 
 export default function Sidenav() {
   const pathname = usePathname();
   const [user, setUser] = useState("");
   const [dropdownActive, setDropdownActive] = useState(false);
-  const [selected, setSelected] = useState("system");
-  const [currentTheme, setCurrentTheme] = useState("light"); // "light" ou "dark"
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,41 +30,27 @@ export default function Sidenav() {
     fetchUser();
   }, []);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("theme") || "system";
-    setSelected(saved);
-    updateTheme(saved);
-  }, []);
-
-  function updateTheme(theme) {
-    const root = document.documentElement;
-    if (theme === "system") {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      root.classList.toggle("dark", prefersDark);
-      setCurrentTheme(prefersDark ? "dark" : "light");
-    } else {
-      root.classList.toggle("dark", theme === "dark");
-      setCurrentTheme(theme);
-    }
-  }
-
-  function applyTheme(theme) {
-    setSelected(theme);
-    localStorage.setItem("theme", theme);
-    updateTheme(theme);
-  }
-
   return (
-    <div className="bg-white dark:bg-gray-900 h-screen w-[250px] border-r border-blue-400 text-black dark:text-white p-10 flex flex-col justify-between items-center gap-10">
-      <div className="w-full">
-        <div className="flex items-center mb-10">
-          <div className="flex items-center gap-3">
-            <img src="/athonfav.png" className="w-8" alt="Icon Athon Telecom" />
-            <p className="font-medium">Athon Telecom</p>
+    <aside
+      className={cn(
+        "w-64 bg-background-elevated border-r border-card-border flex flex-col h-screen justify-between"
+      )}
+    >
+      {/* Logo estilo lovable zone */}
+      <div className="p-6 border-b border-card-border">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+            <img src="/athonfav.png" alt="" />
           </div>
+          <span className="font-semibold text-foreground text-lg">
+            Athon Telecom
+          </span>
         </div>
+      </div>
 
-        <ul className="flex flex-col gap-5 w-full">
+      {/* Navigation com estilo lovable zone */}
+      <nav className="flex-1 p-4">
+        <ul className="space-y-2">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -73,10 +58,12 @@ export default function Sidenav() {
                 <Link
                   href={link.href}
                   title={link.title}
-                  className={clsx(
-                    "flex items-center gap-3 px-4 py-2 rounded-md transition-colors",
-                    "hover:opacity-80",
-                    isActive && link.activeColor
+                  className={cn(
+                    "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200",
+                    "hover:bg-secondary/50 hover:text-foreground",
+                    isActive
+                      ? "bg-primary/10 text-primary border border-primary/20 shadow-glow"
+                      : "text-foreground-muted hover:text-foreground"
                   )}
                 >
                   {link.icon}
@@ -86,28 +73,36 @@ export default function Sidenav() {
             );
           })}
         </ul>
-      </div>
+      </nav>
 
-      <div className="flex items-center flex-col">
-        <div className="relative flex flex-col items-start gap-5">
+      {/* User Profile estilo lovable zone */}
+      <div className="p-4 border-t border-card-border">
+        <div className="flex flex-col gap-4">
           {dropdownActive && (
             <div className="flex flex-col items-start gap-3 cursor-pointer">
               <Logout />
-              <Link href={"/home/settings"} className="flex items-start gap-3 hover:text-blue-300 cursor-pointer">
+              <Link
+                href={"/home/settings"}
+                className="flex items-start gap-3 hover:text-blue-300 cursor-pointer"
+              >
                 <UserCog className="text-blue-300" />
                 <p>Editar Perfil</p>
               </Link>
             </div>
           )}
           <button
-            onClick={() => setDropdownActive(prev => !prev)}
-            className="cursor-pointer flex items-center gap-3 rounded-lg transition duration-300 transform hover:scale-105 hover:shadow-xl p-2 hover:text-red-300"
+            onClick={() => setDropdownActive((prev) => !prev)}
+            className="flex items-center gap-3 p-3 rounded-xl bg-secondary/30 transition duration-300 hover:scale-105"
           >
-            <User />
-            <p>{user ? user : "Carregando..."}</p>
+            <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center text-sm font-semibold text-primary-foreground">
+              {user?.[0]?.toUpperCase() || "U"}
+            </div>
+            <span className="text-sm font-medium text-foreground">
+              {user ? user : "Carregando..."}
+            </span>
           </button>
         </div>
       </div>
-    </div>
+    </aside>
   );
 }

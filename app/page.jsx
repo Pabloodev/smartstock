@@ -1,24 +1,24 @@
-import { ArrowRight, Check } from 'lucide-react';
 import Link from 'next/link';
 
 export default function LoginPage() {
   return (
-    <div className="grid min-h-svh lg:grid-cols-2">
-      <div className="flex flex-col gap-4 p-6 md:p-10 bg-zinc-900">
+    <div className="grid min-h-svh lg:grid-cols-2 bg-gradient-to-r from-zinc-950 to-blue-950">
+      <div className="flex flex-col gap-4 p-6 md:p-10 ">
         <div className="flex items-center justify-center gap-5">
           <img src="athonfav.png" alt="Icon Athon Telecom" className="w-10" />
           <h1 className="text-3xl font-medium">Smart Stock</h1>
           <span className="text-end text-orange-300 font-bold">por Athon Telecom</span>
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-lg flex flex-col gap-5">
-            <h2 className="text-5xl font-medium">Nossa <span className='text-gradient'>Gestão</span>, de um Jeito Muito Mais Facil.</h2>
+          <div className="w-full max-w-lg flex flex-col gap-5 items-center">
+            <h2 className="text-5xl font-medium">Nossa <span className='text-gradient'>Gestão</span>, de um Jeito Muito Mais <span className='text-gradient'>Facil</span>.</h2>
 
             <Link href="/home">
-              <button className='cursor-pointer flex items-center gap-3 justify-center border-1 border-white px-6 py-2 rounded hover:bg-zinc-800 transition duration-700 hover:text-gradient'>
-                <span>Acessar app</span>
-                <ArrowRight />
-              </button>
+            <div className="bg-linear-to-t from-sky-500 to-indigo-500 rounded-lg cursor-pointer p-0.5 shadow-lg shadow-blue-500/50 hover:from-purple-500 hover:to-sky-500 transition duration-300 w-fit">
+          <button className="bg-black text-white px-4 py-2 rounded-lg duration-700 cursor-pointer">
+            Acesse o aplicativo
+          </button>
+        </div>
             </Link>
 
             <footer className="absolute bottom-4 left-4 text-xs text-white">

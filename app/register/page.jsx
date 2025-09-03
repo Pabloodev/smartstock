@@ -2,8 +2,8 @@ import { RegisterForm } from "../ui/components/register-form"
 
 export default function LoginPage() {
   return (
-    <div className="grid min-h-svh lg:grid-cols-2">
-      <div className="flex flex-col gap-4 p-6 md:p-10 bg-zinc-900">
+    <div className="grid min-h-svh lg:grid-cols-2 bg-gradient-to-r from-zinc-950 to-blue-950">
+      <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex items-center justify-center gap-5">
           <img src="athonfav.png" alt="Icon Athon Telecom" className="w-10" />
           <h1 className="text-3xl font-medium">Smart Stock</h1>

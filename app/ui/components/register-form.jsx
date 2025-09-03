@@ -116,9 +116,14 @@ export function RegisterForm({ className, ...props }) {
           {isSubmitting ? (
             <Loading />
           ) : (
-            <Button type="submit" className="w-full cursor-pointer flex items-center gap-3 justify-center border-1 border-white px-6 py-2 rounded hover:bg-zinc-700 transition duration-700">
-              Registrar
-            </Button>
+            <div className="bg-linear-to-t from-sky-500 to-indigo-500 rounded-lg cursor-pointer p-0.5 shadow-lg shadow-blue-500/50 hover:from-purple-500 hover:to-sky-500 transition duration-300">
+              <button
+                type="submit"
+                className="bg-black text-white px-4 py-2 rounded-lg duration-700 cursor-pointer w-full"
+              >
+                Registrar
+              </button>
+            </div>
           )}
         </div>
       </div>

@@ -21,15 +21,12 @@ export function LoginForm({ className, ...props }) {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [state, formAction] = useActionState(
-    async (prevState, formData) => {
-      setIsSubmitting(true);
-      const result = await sign(formData);
-      setIsSubmitting(false);
-      return result;
-    },
-    initialState
-  );
+  const [state, formAction] = useActionState(async (prevState, formData) => {
+    setIsSubmitting(true);
+    const result = await sign(formData);
+    setIsSubmitting(false);
+    return result;
+  }, initialState);
 
   return (
     <form
@@ -92,12 +89,18 @@ export function LoginForm({ className, ...props }) {
         )}
 
         <Link href="/register">
-          <button type="button" className="text-gray-300 hover:text-white cursor-pointer">
+          <button
+            type="button"
+            className="text-gray-300 hover:text-white cursor-pointer"
+          >
             <p>Ainda não tem uma conta? faça o cadastro.</p>
           </button>
         </Link>
         <Link href="/solicita-reset">
-          <button type="button" className="text-gray-300 hover:text-white cursor-pointer">
+          <button
+            type="button"
+            className="text-gray-300 hover:text-white cursor-pointer"
+          >
             <p>Resetar conta</p>
           </button>
         </Link>
@@ -106,9 +109,14 @@ export function LoginForm({ className, ...props }) {
           {isSubmitting ? (
             <Loading />
           ) : (
-            <Button type="submit" className="cursor-pointer flex items-center gap-3 justify-center border-1 border-white px-6 py-2 rounded hover:bg-zinc-700 transition duration-700 w-full">
-              Login
-            </Button>
+            <div className="bg-linear-to-t from-sky-500 to-indigo-500 rounded-lg cursor-pointer p-0.5 shadow-lg shadow-blue-500/50 hover:from-purple-500 hover:to-sky-500 transition duration-300">
+              <button
+                type="submit"
+                className="bg-black text-white px-4 py-2 rounded-lg duration-700 cursor-pointer w-full"
+              >
+                Login
+              </button>
+            </div>
           )}
         </div>
       </div>

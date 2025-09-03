@@ -1,14 +1,23 @@
-// app/registros/page.tsx
 "use client";
 
-import { useEffect, useState } from "react";
-import { Download, FileText, Sheet } from 'lucide-react';
+import { useEffect, useState, useMemo } from "react";
+import { Download, FileText, Sheet, Filter } from "lucide-react";
 
 export default function Page() {
   const [registros, setRegistros] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tipoSelecionado, setTipoSelecionado] = useState("EQUIPAMENTO_DEVOLVIDO");
-  const [dropDownActive, setDropDownActive] = useState(false)
+  const [dropDownActive, setDropDownActive] = useState(false);
+  const [mostrarFiltros, setMostrarFiltros] = useState(false);
+
+  // Filtros
+  const [filtroContrato, setFiltroContrato] = useState("");
+  const [filtroCliente, setFiltroCliente] = useState("");
+  const [filtroNomeCliente, setFiltroNomeCliente] = useState("");
+  const [filtroDataFechamento, setFiltroDataFechamento] = useState("");
+  const [filtroDataAbertura, setFiltroDataAbertura] = useState("");
+  const [filtroOS, setFiltroOS] = useState("");
+  const [filtroStatus, setFiltroStatus] = useState("");
 
   const diagnosticos = [
     { label: "Equipamento Devolvido", value: "EQUIPAMENTO_DEVOLVIDO" },
@@ -26,10 +35,10 @@ export default function Page() {
   ];
 
   function formatarData(dataString) {
+    if (!dataString) return "—";
     const data = new Date(dataString);
     return new Intl.DateTimeFormat("pt-BR").format(data);
   }
-
 
   useEffect(() => {
     async function fetchData() {
@@ -37,8 +46,6 @@ export default function Page() {
       try {
         const res = await fetch(`/api/records?assunto=${tipoSelecionado}`);
         const data = await res.json();
-
-        console.log("Dados recebidos:", data);
         setRegistros(data[tipoSelecionado] || []);
       } catch (err) {
         console.error("Erro ao buscar dados:", err);
@@ -47,34 +54,110 @@ export default function Page() {
         setLoading(false);
       }
     }
-
     fetchData();
   }, [tipoSelecionado]);
 
-
-  async function handleDownloadPDF() {
-    const res = await fetch("/api/records?assunto=${tipoSelecionado}");
-    const data = await res.json();
-    exportPDF(data);
-  }
-
-  async function handleDownloadXLSX() {
-    const res = await fetch("/api/records?assunto=${tipoSelecionado}");
-    const data = await res.json();
-    exportXLSX(data);
-  }
-
+  // Registros filtrados
+  const registrosFiltrados = useMemo(() => {
+    return registros.filter((r) => {
+      return (
+        (filtroContrato === "" || String(r.id_contrato).includes(filtroContrato)) &&
+        (filtroCliente === "" || String(r.id_cliente).includes(filtroCliente)) &&
+        (filtroNomeCliente === "" || r.nome_cliente?.toLowerCase().includes(filtroNomeCliente.toLowerCase())) &&
+        (filtroDataFechamento === "" || r.data_fechamento?.startsWith(filtroDataFechamento)) &&
+        (filtroDataAbertura === "" || r.data_abertura?.startsWith(filtroDataAbertura)) &&
+        (filtroOS === "" || String(r.id_os).includes(filtroOS)) &&
+        (filtroStatus === "" || r.status_comodato?.toLowerCase().includes(filtroStatus.toLowerCase()))
+      );
+    });
+  }, [
+    registros,
+    filtroContrato,
+    filtroCliente,
+    filtroNomeCliente,
+    filtroDataFechamento,
+    filtroDataAbertura,
+    filtroOS,
+    filtroStatus,
+  ]);
 
   return (
     <div className="bg-white shadow dark:bg-gray-900 text-gray-900 dark:text-white p-8 rounded-lg">
-      <h1 className="text-gray-900 dark:text-white text-2xl font-semibold mb-6">Registros de Equipamentos Devolvidos</h1>
+      <h1 className="text-gray-900 dark:text-white text-2xl font-semibold mb-6">
+        Registros de Equipamentos Devolvidos
+      </h1>
 
+      {/* Botão toggle filtros */}
+      <button
+        onClick={() => setMostrarFiltros(!mostrarFiltros)}
+        className="mb-6 flex items-center gap-2 px-4 py-2 rounded bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition"
+      >
+        <Filter className="w-4 h-4" />
+        {mostrarFiltros ? "Esconder filtros" : "Mostrar filtros"}
+      </button>
+
+      {/* Filtros (só aparece se ativo) */}
+      {mostrarFiltros && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 animate-fadeIn">
+          <input
+            type="text"
+            placeholder="Contrato"
+            value={filtroContrato}
+            onChange={(e) => setFiltroContrato(e.target.value)}
+            className="px-3 py-2 rounded border dark:bg-slate-800"
+          />
+          <input
+            type="text"
+            placeholder="ID Cliente"
+            value={filtroCliente}
+            onChange={(e) => setFiltroCliente(e.target.value)}
+            className="px-3 py-2 rounded border dark:bg-slate-800"
+          />
+          <input
+            type="text"
+            placeholder="Nome Cliente"
+            value={filtroNomeCliente}
+            onChange={(e) => setFiltroNomeCliente(e.target.value)}
+            className="px-3 py-2 rounded border dark:bg-slate-800"
+          />
+          <input
+            type="date"
+            placeholder="Data Abertura"
+            value={filtroDataAbertura}
+            onChange={(e) => setFiltroDataAbertura(e.target.value)}
+            className="px-3 py-2 rounded border dark:bg-slate-800"
+          />
+          <input
+            type="date"
+            placeholder="Data Fechamento"
+            value={filtroDataFechamento}
+            onChange={(e) => setFiltroDataFechamento(e.target.value)}
+            className="px-3 py-2 rounded border dark:bg-slate-800"
+          />
+          <input
+            type="text"
+            placeholder="OS"
+            value={filtroOS}
+            onChange={(e) => setFiltroOS(e.target.value)}
+            className="px-3 py-2 rounded border dark:bg-slate-800"
+          />
+          <input
+            type="text"
+            placeholder="Status"
+            value={filtroStatus}
+            onChange={(e) => setFiltroStatus(e.target.value)}
+            className="px-3 py-2 rounded border dark:bg-slate-800"
+          />
+        </div>
+      )}
+
+      {/* Select diagnóstico + botão download */}
       <div className="flex items-center gap-10 mb-10">
         <div>
           <label className="text-sm mr-2">Tipo de Diagnóstico:</label>
           <select
             value={tipoSelecionado}
-            onChange={((e) => setTipoSelecionado(e.target.value))}
+            onChange={(e) => setTipoSelecionado(e.target.value)}
             className="dark:bg-slate-800 text-gray-900 dark:text-white cursor-pointer border border-slate-700 px-4 py-2 rounded hover:border-blue-500 transitions duration-300"
           >
             {diagnosticos.map((d) => (
@@ -86,18 +169,21 @@ export default function Page() {
         </div>
 
         <div className="relative">
-          <button onClick={() => setDropDownActive(!dropDownActive)} className="flex items-center border-1 border-slate-800 hover:border-blue-500 transitions duration-300 gap-3 dark:bg-slate-800 text-gray-900 dark:text-white cursor-pointer border border-slate-700 px-4 py-2 rounded-sm">
+          <button
+            onClick={() => setDropDownActive(!dropDownActive)}
+            className="flex items-center gap-3 dark:bg-slate-800 border border-slate-700 px-4 py-2 rounded-sm hover:border-blue-500"
+          >
             <p>Baixar relatório</p>
             <Download />
           </button>
 
           {dropDownActive && (
             <div className="flex flex-col gap-2 text-start p-1 absolute bg-white dark:bg-slate-900 rounded-sm">
-              <button onClick={handleDownloadPDF} className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border-1 border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
+              <button className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
                 <span>Baixar em PDF</span>
                 <FileText />
               </button>
-              <button onClick={handleDownloadXLSX} className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border-1 border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
+              <button className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
                 <span>Baixar em XLSX</span>
                 <Sheet />
               </button>
@@ -105,7 +191,6 @@ export default function Page() {
           )}
         </div>
       </div>
-
 
       {loading ? (
         <p className="text-gray-400">Carregando registros...</p>
@@ -126,10 +211,14 @@ export default function Page() {
               </tr>
             </thead>
             <tbody>
-              {registros.map((registro, idx) => (
+              {registrosFiltrados.map((registro, idx) => (
                 <tr
                   key={idx}
-                  className={idx % 2 === 0 ? "bg-white border border-t-gray-300 dark:bg-slate-900" : "bg-slate-800"}
+                  className={
+                    idx % 2 === 0
+                      ? "bg-white border border-t-gray-300 dark:bg-slate-900"
+                      : "bg-slate-800"
+                  }
                 >
                   <td className="px-4 py-2">{registro.id ?? "—"}</td>
                   <td className="px-4 py-2">{formatarData(registro.data_abertura)}</td>
@@ -149,7 +238,7 @@ export default function Page() {
 
       {!loading && (
         <p className="mt-4 text-sm text-slate-400">
-          Total de registros: {registros.length}
+          Total de registros filtrados: {registrosFiltrados.length}
         </p>
       )}
     </div>

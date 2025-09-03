@@ -54,9 +54,14 @@ export default function RequestReset() {
 
 
 
-        <button type="submit" className="cursor-pointer flex items-center gap-3 justify-center border-1 border-white px-6 py-2 rounded hover:bg-zinc-700 transition duration-700">
-          Enviar
-        </button>
+<div className="bg-linear-to-t from-sky-500 to-indigo-500 rounded-lg cursor-pointer p-0.5 shadow-lg shadow-blue-500/50 hover:from-purple-500 hover:to-sky-500 transition duration-300">
+          <button
+            type="submit"
+            className="bg-black text-white px-4 py-2 rounded-lg duration-700 cursor-pointer w-full"
+          >
+            Enviar
+          </button>
+        </div>
 
 
         {mensagem && (

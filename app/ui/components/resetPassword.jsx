@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { MoveLeft } from 'lucide-react';
+import { MoveLeft } from "lucide-react";
 
 export default function ResetPassword() {
   const [novaSenha, setNovaSenha] = useState("");
@@ -40,12 +40,11 @@ export default function ResetPassword() {
 
   return (
     <div className="flex items-center justify-center px-4">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-3"
-      >
-
-        <Link className="text-sm flex items-center gap-2 transition duration-300 hover:scale-115" href={"/login"}>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <Link
+          className="text-sm flex items-center gap-2 transition duration-300 hover:scale-115"
+          href={"/login"}
+        >
           <MoveLeft />
           <span>Voltar ao login</span>
         </Link>
@@ -61,12 +60,14 @@ export default function ResetPassword() {
           required
         />
 
-        <button
-          type="submit"
-          className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 cursor-pointer transitions duration-300"
-        >
-          Redefinir
-        </button>
+        <div className="bg-linear-to-t from-sky-500 to-indigo-500 rounded-lg cursor-pointer p-0.5 shadow-lg shadow-blue-500/50 hover:from-purple-500 hover:to-sky-500 transition duration-300">
+          <button
+            type="submit"
+            className="bg-black text-white px-4 py-2 rounded-lg duration-700 cursor-pointer w-full"
+          >
+            Redefinir
+          </button>
+        </div>
 
         {mensagem && (
           <p className="mt-4 text-sm text-center text-red-600">{mensagem}</p>
