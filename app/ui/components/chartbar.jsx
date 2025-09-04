@@ -39,7 +39,8 @@ export default function Chartbar() {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-800 text-black dark:text-white p-6 rounded-xl w-[500px] h-[700px] flex flex-col gap-6 border-2 border-blue-500">
+    <div className="text-gray-900 font-medium dark:text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center bg-zinc-900">
+    <div className="text-gray-900 font-medium dark:text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center bg-zinc-900">
       <div>
         <h1 className="text-lg font-medium">Total de equipamentos retirados por OS</h1>
         <p className="text-gray-500 text-sm">Contagem total a partir de junho de 2025.</p>
@@ -74,6 +75,7 @@ export default function Chartbar() {
           );
         })}
       </div>
+    </div>
     </div>
   );
 }

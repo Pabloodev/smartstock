@@ -43,7 +43,7 @@ export default function Sidenav() {
             <img src="/athonfav.png" alt="" />
           </div>
           <span className="font-semibold text-foreground text-lg">
-            Athon Telecom
+            Smarstock
           </span>
         </div>
       </div>
@@ -92,8 +92,9 @@ export default function Sidenav() {
           )}
           <button
             onClick={() => setDropdownActive((prev) => !prev)}
-            className="flex items-center gap-3 p-3 rounded-xl bg-secondary/30 transition duration-300 hover:scale-105"
+            className="flex items-center gap-3 p-3 rounded-xl bg-secondary/30 transition duration-300 hover:scale-105 cursor-pointer w-full"
           >
+            <User />
             <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center text-sm font-semibold text-primary-foreground">
               {user?.[0]?.toUpperCase() || "U"}
             </div>

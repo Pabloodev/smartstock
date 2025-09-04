@@ -28,10 +28,10 @@ export default function Chart() {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-slate-800 text-gray-900 font-medium dark:text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center border-2 border-blue-500">
+    <div className="text-gray-900 font-medium dark:text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center bg-zinc-900">
       <div>
         <h1 className="text-lg font-medium">Total de equipamentos retirados</h1>
-        <p className="text-gray-500">Contagem total a partir de junho de 2025.</p>
+        <p className="text-gray-400">Contagem total a partir de junho de 2025.</p>
       </div>
 
       <div className="text-center bg-white dark:bg-slate-800 w-40 h-40 p-10 rounded-full border-5 border-blue-500 flex flex-col justify-center items-center">

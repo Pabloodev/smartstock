@@ -122,8 +122,13 @@
 }
 
 body {
-  background-color: black;
-  color: white;
+  background-color: #0f0f0f;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.112) 2%, transparent 5%);
+  background-size: 5px 5px;
+  font-family: Geist;
+  color: rgb(255, 255, 255);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 @layer base {
@@ -148,4 +153,13 @@ body {
   background: linear-gradient(to right, #4bcdf5 0%, #EE71FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0) rotate(3deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 5s ease-in-out infinite;
 }

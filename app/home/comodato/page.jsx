@@ -59,6 +59,9 @@ export default function Page() {
 
   return (
     <div className="p-10">
+      <h1 className="text-3xl font-semibold mb-6">
+        Baixa de Equipamentos em <span className="text-gradient">Comodatos</span>
+      </h1>
       <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Escaneie o QR Code do MAC:</h2>
       <input
         type="text"
@@ -72,7 +75,7 @@ export default function Page() {
             <div className="p-10 overflow-x-auto">
               <h3 className="text-xl text-blue-400 dark:text-red-200 font-bold mb-4">{resultado.erro}</h3>
               <table className="min-w-[1200px] text-sm text-left border-collapse rounded-sm min-w-full table-auto text-sm">
-                <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs rounded-lg">
+                <thead className="uppercase text-xs rounded-lg">
                   <tr>
                     <th className="px-4 py-2">ID Contrato</th>
                     <th className="px-4 py-2">ID OS</th>
@@ -91,7 +94,7 @@ export default function Page() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="dark:bg-gray-900 text-gray-900 dark:text-white border-b border-gray-700">
+                  <tr className="border-b border-gray-700">
                     <td className="px-4 py-4">--</td>
                     <td className="px-4 py-4">--</td>
                     <td className="px-4 py-4">--</td>
@@ -115,7 +118,7 @@ export default function Page() {
             <div className="mt-8 overflow-x-auto text-white overflow-x-auto">
               <h3 className="text-xl text-green-500 dark:text-green-200 font-bold mb-4">Aparelho baixado com sucesso!</h3>
               <table className="min-w-[1200px] text-sm text-left border-collapse rounded-lg min-w-full table-auto text-sm">
-                <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs rounded-lg">
+                <thead className="uppercase text-xs rounded-lg">
                   <tr>
                     <th className="px-4 py-2">ID Contrato</th>
                     <th className="px-4 py-2">ID OS</th>
@@ -134,7 +137,7 @@ export default function Page() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white text-gray-600 dark:text-white dark:bg-gray-900 border-b border-gray-70">
+                  <tr className="border-b border-gray-70">
                     <td className="px-4 py-2">{resultado.id_contrato}</td>
                     <td className="px-4 py-2">{resultado.id_os}</td>
                     <td className="px-4 py-2">{resultado.id_patrimonio}</td>
@@ -163,7 +166,7 @@ export default function Page() {
         ) : (
           <div className="p-10 rounded-lg overflow-x-auto">
             <table className="min-w-[1200px] text-sm text-left border-collapse rounded-lg min-w-full table-auto text-sm">
-              <thead className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400 uppercase text-xs">
+              <thead className="uppercase text-xs">
                 <tr>
                   <th className="px-4 py-2">ID Contrato</th>
                   <th className="px-4 py-2">ID OS</th>
@@ -182,7 +185,7 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white border-b border-gray-700">
+                <tr className="border-b border-gray-700">
                   <td className="px-4 py-4">--</td>
                   <td className="px-4 py-4">--</td>
                   <td className="px-4 py-4">--</td>

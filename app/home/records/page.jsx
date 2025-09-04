@@ -82,15 +82,15 @@ export default function Page() {
   ]);
 
   return (
-    <div className="bg-white shadow dark:bg-gray-900 text-gray-900 dark:text-white p-8 rounded-lg">
-      <h1 className="text-gray-900 dark:text-white text-2xl font-semibold mb-6">
-        Registros de Equipamentos Devolvidos
+    <div className="p-8 rounded-lg">
+      <h1 className="text-3xl font-semibold mb-6">
+        Registros de Equipamentos <span className="text-gradient">Devolvidos</span>
       </h1>
 
       {/* Botão toggle filtros */}
       <button
         onClick={() => setMostrarFiltros(!mostrarFiltros)}
-        className="mb-6 flex items-center gap-2 px-4 py-2 rounded bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 transition"
+        className="mb-6 flex items-center gap-2 px-4 py-2 rounded cursor-pointer border border-gray-500 rounded-lg transition"
       >
         <Filter className="w-4 h-4" />
         {mostrarFiltros ? "Esconder filtros" : "Mostrar filtros"}
@@ -104,49 +104,49 @@ export default function Page() {
             placeholder="Contrato"
             value={filtroContrato}
             onChange={(e) => setFiltroContrato(e.target.value)}
-            className="px-3 py-2 rounded border dark:bg-slate-800"
+            className="px-3 py-2 rounded border"
           />
           <input
             type="text"
             placeholder="ID Cliente"
             value={filtroCliente}
             onChange={(e) => setFiltroCliente(e.target.value)}
-            className="px-3 py-2 rounded border dark:bg-slate-800"
+            className="px-3 py-2 rounded border"
           />
           <input
             type="text"
             placeholder="Nome Cliente"
             value={filtroNomeCliente}
             onChange={(e) => setFiltroNomeCliente(e.target.value)}
-            className="px-3 py-2 rounded border dark:bg-slate-800"
+            className="px-3 py-2 rounded border"
           />
           <input
             type="date"
             placeholder="Data Abertura"
             value={filtroDataAbertura}
             onChange={(e) => setFiltroDataAbertura(e.target.value)}
-            className="px-3 py-2 rounded border dark:bg-slate-800"
+            className="px-3 py-2 rounded border"
           />
           <input
             type="date"
             placeholder="Data Fechamento"
             value={filtroDataFechamento}
             onChange={(e) => setFiltroDataFechamento(e.target.value)}
-            className="px-3 py-2 rounded border dark:bg-slate-800"
+            className="px-3 py-2 rounded border"
           />
           <input
             type="text"
             placeholder="OS"
             value={filtroOS}
             onChange={(e) => setFiltroOS(e.target.value)}
-            className="px-3 py-2 rounded border dark:bg-slate-800"
+            className="px-3 py-2 rounded border"
           />
           <input
             type="text"
             placeholder="Status"
             value={filtroStatus}
             onChange={(e) => setFiltroStatus(e.target.value)}
-            className="px-3 py-2 rounded border dark:bg-slate-800"
+            className="px-3 py-2 rounded border"
           />
         </div>
       )}
@@ -158,7 +158,7 @@ export default function Page() {
           <select
             value={tipoSelecionado}
             onChange={(e) => setTipoSelecionado(e.target.value)}
-            className="dark:bg-slate-800 text-gray-900 dark:text-white cursor-pointer border border-slate-700 px-4 py-2 rounded hover:border-blue-500 transitions duration-300"
+            className="border bg-zinc-900 border-gray-500 px-3 py-2 rounded-lg cursor-pointer"
           >
             {diagnosticos.map((d) => (
               <option key={d.value} value={d.value}>
@@ -171,19 +171,19 @@ export default function Page() {
         <div className="relative">
           <button
             onClick={() => setDropDownActive(!dropDownActive)}
-            className="flex items-center gap-3 dark:bg-slate-800 border border-slate-700 px-4 py-2 rounded-sm hover:border-blue-500"
+            className="flex items-center gap-3 border border-slate-500 px-4 py-2 rounded-sm cursor-pointer"
           >
             <p>Baixar relatório</p>
             <Download />
           </button>
 
           {dropDownActive && (
-            <div className="flex flex-col gap-2 text-start p-1 absolute bg-white dark:bg-slate-900 rounded-sm">
-              <button className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
+            <div className="flex flex-col gap-2 text-start p-1 absolute rounded-sm bg-zinc-900">
+              <button className="px-2 py-3 flex items-center gap-2 cursor-pointer border border-gray-500 rounded-sm text-sm transition duration-300 hover:border-blue-500">
                 <span>Baixar em PDF</span>
                 <FileText />
               </button>
-              <button className="px-2 py-3 flex items-center gap-2 cursor-pointer bg-white dark:bg-slate-800 border border-gray-900 rounded-sm text-sm transition duration-300 hover:border-blue-500">
+              <button className="px-2 py-3 flex items-center gap-2 cursor-pointer border border-gray-500 rounded-sm text-sm transition duration-300 hover:border-blue-500">
                 <span>Baixar em XLSX</span>
                 <Sheet />
               </button>
@@ -197,7 +197,7 @@ export default function Page() {
       ) : (
         <div className="overflow-x-auto rounded-lg">
           <table className="min-w-full table-auto text-sm">
-            <thead className="dark:bg-slate-800 dark:text-gray-300 text-gray-900">
+            <thead className="">
               <tr>
                 <th className="px-4 py-2 text-left">ID</th>
                 <th className="px-4 py-2 text-left">Data Abertura</th>
@@ -216,7 +216,7 @@ export default function Page() {
                   key={idx}
                   className={
                     idx % 2 === 0
-                      ? "bg-white border border-t-gray-300 dark:bg-slate-900"
+                      ? "border-t border-gray-700"
                       : "bg-slate-800"
                   }
                 >
