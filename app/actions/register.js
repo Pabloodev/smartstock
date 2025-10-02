@@ -1,8 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
-
 export async function register(formData) {
   const user = formData.get("user")?.toString();
   const email = formData.get("email")?.toString();
@@ -24,33 +21,5 @@ export async function register(formData) {
     return { error: true, message: "Erro ao registrar usuário." };
   }
 
-  const { token } = await res.json();
-
-  const cookieStore = cookies();
-  cookieStore.set("token", token, {
-    httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    path: "/",
-  });
-
-  if (user) {
-    cookieStore.set("user", user, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      path: "/",
-    });
-  }
-
-  if (email) {
-    cookieStore.set("email", email, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      path: "/",
-    });
-  }
-
-  redirect("/login");
+  return { success: true };
 }

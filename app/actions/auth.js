@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 export async function sign(formData) {
@@ -41,5 +40,6 @@ export async function sign(formData) {
     path: "/",
   });
 
-  redirect("/home");
+  // Não usar redirect aqui
+  return { success: true };
 }

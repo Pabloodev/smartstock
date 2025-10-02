@@ -1,16 +1,17 @@
 "use client";
 
 import { cn } from "@/app/lib/utils";
-import { Button } from "@/app/ui/components/Button";
-import { Input } from "@/app/ui/components/Input";
-import { Label } from "@/app/ui/components/Label";
+import { Input } from "./input";
+import { Label } from "./label";
 import { useState } from "react";
 import { useActionState } from "react";
-import { EyeClosed, Eye } from "lucide-react";
+import { EyeClosed, Eye, Terminal } from "lucide-react";
 import Loading from "./Loading";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation";
 import { register } from "@/app/actions/register";
+import { Alert, AlertDescription, AlertTitle } from "./alert";
+import { MoveLeft } from 'lucide-react';
 
 const initialState = {
   message: "",
@@ -20,16 +21,25 @@ const initialState = {
 export function RegisterForm({ className, ...props }) {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [alert, setAlert] = useState(null);
+  const router = useRouter();
 
-  const [state, formAction] = useActionState(
-    async (prevState, formData) => {
-      setIsSubmitting(true);
-      const result = await register(formData);
-      setIsSubmitting(false); 
-      return result;
-    },
-    initialState
-  );
+  const [state, formAction] = useActionState(async (prevState, formData) => {
+    setIsSubmitting(true);
+    const result = await register(formData);
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setAlert({ type: "success", message: "Registro efetuado com sucesso!" });
+      setTimeout(() => {
+        router.push("/login");
+      }, 1000);
+    } else if (result.error) {
+      setAlert({ type: "destructive", message: result.message });
+    }
+
+    return result;
+  }, initialState);
 
   return (
     <form
@@ -38,6 +48,11 @@ export function RegisterForm({ className, ...props }) {
       className={cn("flex flex-col gap-6", className)}
       {...props}
     >
+      <Link href={'/'} className="flex items-center gap-2 cursor-pointer hover:text-gray-400 transition duration-300">
+        <MoveLeft />
+        <button className="cursor-pointer">Voltar a pagina inicial</button>
+      </Link>
+
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold text-white">Registro</h1>
         <p className="text-muted-foreground text-sm text-balance text-white">
@@ -45,10 +60,15 @@ export function RegisterForm({ className, ...props }) {
         </p>
       </div>
 
-      
+      {alert && (
+        <Alert variant={alert.type} className="mb-4">
+          <Terminal className="h-4 w-4" />
+          <AlertTitle>{alert.type === "success" ? "Sucesso!" : "Erro!"}</AlertTitle>
+          <AlertDescription>{alert.message}</AlertDescription>
+        </Alert>
+      )}
 
       <div className="grid gap-2">
-
         <div className="grid gap-3">
           <Label htmlFor="user">User</Label>
           <Input
@@ -57,8 +77,7 @@ export function RegisterForm({ className, ...props }) {
             placeholder="joao"
             required
             name="user"
-            className="invalid:border-blue-300 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-blue-300 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
-          disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
+            className="invalid:border-blue-300 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-blue-300 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
           />
         </div>
 
@@ -70,8 +89,7 @@ export function RegisterForm({ className, ...props }) {
             placeholder="joao.colaborador@gmail.com"
             required
             name="email"
-            className="invalid:border-blue-300 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-blue-300 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
-          disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
+            className="invalid:border-blue-300 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-blue-300 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
           />
         </div>
 
@@ -86,29 +104,20 @@ export function RegisterForm({ className, ...props }) {
               required
               placeholder="******"
               name="password"
-              className="invalid:border-blue-300 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-blue-300 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 
-          disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
+              className="invalid:border-blue-300 invalid:text-pink-600 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:invalid:border-blue-300 focus:invalid:outline-pink-500 disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500 disabled:shadow-none dark:disabled:border-gray-700 dark:disabled:bg-gray-800/20"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? (
-                <EyeClosed className="h-4 w-4" />
-              ) : (
-                <Eye className="h-4 w-4" />
-              )}
+              {showPassword ? <EyeClosed className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>
         </div>
 
-        {state?.error && (
-          <p className="text-pink-600 text-sm">{state.message}</p>
-        )}
-
-        <Link href="/login"> 
+        <Link href="/login">
           <button type="button" className="underline underline-offset-1 text-gray-300 hover:text-white cursor-pointer">
-            <p>Já tem uma conta, faça login.</p>
+            Já tem uma conta, faça login.
           </button>
         </Link>
 

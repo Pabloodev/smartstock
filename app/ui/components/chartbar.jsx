@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
+import { BorderBeam } from "./border-beam";
 
 export default function Chartbar() {
   const [data, setData] = useState({});
@@ -39,7 +40,8 @@ export default function Chartbar() {
   };
 
   return (
-    <div className="text-gray-900 font-medium dark:text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center bg-zinc-900">
+    <div className="relative text-gray-900 font-medium dark:text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center bg-zinc-900">
+      <BorderBeam />
     <div className="text-gray-900 font-medium dark:text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center bg-zinc-900">
       <div>
         <h1 className="text-lg font-medium">Total de equipamentos retirados por OS</h1>

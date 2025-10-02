@@ -2,6 +2,7 @@
 
 import { TrendingUp } from 'lucide-react';
 import { useState, useEffect } from "react";
+import { BorderBeam } from './border-beam';
 
 export default function Chart() {
 
@@ -28,7 +29,8 @@ export default function Chart() {
   }, []);
 
   return (
-    <div className="text-gray-900 font-medium dark:text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center bg-zinc-900">
+    <div className="relative text-gray-900 font-medium dark:text-white p-5 rounded-xl w-[500px] flex flex-col gap-10 items-center bg-zinc-900">
+      <BorderBeam />
       <div>
         <h1 className="text-lg font-medium">Total de equipamentos retirados</h1>
         <p className="text-gray-400">Contagem total a partir de junho de 2025.</p>
